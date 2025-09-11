@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<!--
+redistributed.net
+© 2025 redistributed
+Licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+https://creativecommons.org/licenses/by-nc-nd/4.0/
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We have the money to end starvation. Run your own numbers | redistributed</title>
+    <meta name="description" content="Interactive calculator showing how small percentages of military spending, tax abuse, or luxury consumption could eliminate starvation. Based on official data.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://redistributed.net">
+    <meta property="og:title" content="We have the money to end starvation">
+    <meta property="og:description" content="Interactive calculator showing how small percentages of military spending, tax abuse, or luxury consumption could eliminate starvation. Based on official data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://redistributed.net">
+    <meta property="og:site_name" content="redistributed">
+    <meta property="og:image" content="https://redistributed.net/og-image.jpg">
+    <meta property="og:image:width" content="900">
+    <meta property="og:image:height" content="900">
+    <link rel="preload" href="fonts/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Prata-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <style>
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url('fonts/JetBrainsMono-Light.woff2') format('woff2');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url('fonts/JetBrainsMono-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url('fonts/JetBrainsMono-Medium.woff2') format('woff2');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url('fonts/JetBrainsMono-SemiBold.woff2') format('woff2');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url('fonts/JetBrainsMono-Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Prata';
+        src: url('fonts/Prata-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      .icon {
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        vertical-align: -0.125em;
+      }
+
+      :root {
+        --bg: #0f0f0f;
+        --surface: #1a1a1a;
+        --surface-elevated: #232323;
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+        --text-tertiary: #7a7a7a;
+        --border: #2a2a2a;
+        --border-subtle: #1f1f1f;
+        --shadow-dark: rgba(0, 0, 0, 0.5);
+        --shadow-light: rgba(255, 255, 255, 0.05);
+        --fill-color: rgba(255, 255, 255, 0.5);
+        --track-height: 6px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'JetBrains Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+        background-color: var(--bg);
+        color: var(--text-primary);
+        line-height: 1.6;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .title {
+        font-size: clamp(2.8rem, 5.1vw, 4.4rem);
+        font-weight: 700;
+        margin-bottom: 0;
+        color: var(--text-primary);
+        font-family: 'Prata', serif;
+      }
+
+      .subtitle {
+        font-size: clamp(0.875rem, 1.1vw, 1.4rem);
+        font-weight: 400;
+        color: var(--text-secondary);
+        max-width: 40ch;
+        margin: 0 auto;
+        line-height: 1.4;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .main-content {
+        width: 100%;
+        max-width: 800px;
+      }
+
+      .section-cta {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+
+      .controls-results {
+        background-color: var(--surface);
+        border: 1px solid;
+        border-image: linear-gradient(to right, transparent, var(--border), transparent) 1;
+        border-radius: 1rem;
+        padding: 3rem;
+        margin-bottom: 2rem;
+      }
+
+      .control-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 3rem;
+      }
+
+      .control-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .custom-dropdown {
+        position: relative;
+        width: 100%;
+      }
+
+      .dropdown-toggle {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        background-color: var(--surface-elevated);
+        border: 1px solid;
+        border-image: linear-gradient(to right, transparent, var(--border), transparent) 1;
+        border-radius: 0.5rem;
+        color: var(--text-primary);
+        font-size: 1rem;
+        font-weight: 400;
+        font-family: 'JetBrains Mono', monospace;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        appearance: none;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .dropdown-toggle::after {
+        content: '\25BC';
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        transition: transform 0.2s ease;
+      }
+
+      .dropdown-toggle.open::after {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        left: 0;
+        width: 100%;
+        list-style: none;
+        background-color: var(--surface-elevated);
+        border: 1px solid;
+        border-image: linear-gradient(to right, transparent, var(--border), transparent) 1;
+        border-radius: 0.5rem;
+        padding: 0.5rem 0;
+        z-index: 10;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+      }
+
+      .dropdown-menu.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .dropdown-menu li {
+        padding: 0.5rem 1.25rem;
+        color: var(--text-primary);
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.2s ease;
+      }
+
+      .dropdown-menu li:hover {
+        background-color: var(--surface);
+      }
+
+      .control-label {
+        display: block;
+        width: 100%;
+        max-width: 220px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0 auto 0.75rem auto;
+        background-color: var(--surface);
+        border-radius: 0.375rem;
+        box-shadow:
+          inset 1px 1px 2px var(--shadow-dark),
+          inset -1px -1px 2px var(--shadow-light);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        padding: 0.5rem 0.75rem;
+      }
+
+      .slider-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 3rem;
+        width: 100%;
+      }
+
+      .neuro-slider-container {
+        width: 100%;
+        max-width: 600px;
+        position: relative;
+      }
+
+      .neuro-slider {
+        position: relative;
+        width: 100%;
+        height: 24px;
+        cursor: pointer;
+      }
+
+      .neuro-track {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: var(--track-height);
+        background: var(--surface);
+        border-radius: 3px;
+        transform: translateY(-50%);
+        box-shadow:
+          inset 2px 2px 4px var(--shadow-dark),
+          inset -2px -2px 4px var(--shadow-light);
+        overflow: hidden;
+      }
+
+      .neuro-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: var(--fill-color);
+        width: 0%;
+        border-radius: 3px;
+      }
+
+      .neuro-thumb {
+        position: absolute;
+        top: 50%;
+        width: 28px;
+        height: 28px;
+        background: var(--surface);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+        box-shadow:
+          4px 4px 8px var(--shadow-dark),
+          -4px -4px 8px var(--shadow-light);
+        z-index: 2;
+      }
+
+      .neuro-thumb::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: var(--track-height);
+        height: var(--track-height);
+        background: var(--fill-color);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .results-grid {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        /* Adjust this value to control the spacing */
+        align-items: center;
+        width: 100%;
+      }
+
+      .result-item {
+        text-align: center;
+        flex: 1;
+        max-width: 300px;
+      }
+
+      .result-value {
+        font-size: clamp(2.8rem, 4.5vw, 4rem);
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+
+      .result-label {
+        display: block;
+        width: 100%;
+        max-width: 220px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0 auto 0.75rem auto;
+        background-color: var(--surface);
+        border-radius: 0.375rem;
+        box-shadow:
+          inset 1px 1px 2px var(--shadow-dark),
+          inset -1px -1px 2px var(--shadow-light);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        padding: 0.5rem 0.75rem;
+      }
+
+      .share-section {
+        background-color: var(--surface);
+        border: 1px solid;
+        border-image: linear-gradient(to right, transparent, var(--border), transparent) 1;
+        border-radius: 1rem;
+        padding: 3rem;
+        text-align: center;
+      }
+
+      .share-title {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+        margin-bottom: 2rem;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        background-color: var(--surface-elevated);
+        border: 1px solid var(--border);
+        border-radius: 0.5rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 1.25rem;
+        transition: all 0.2s ease;
+      }
+
+      .social-link:hover {
+        color: var(--text-primary);
+      }
+
+      .footer {
+        margin-top: 2rem;
+        text-align: center;
+        padding-top: 1.5rem;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      .footer-line-1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+        font-weight: 500;
+      }
+
+      .footer-line-2 {
+        color: var(--text-tertiary);
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        font-size: 0.75rem;
+      }
+
+      .footer-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--text-primary);
+      }
+
+      .footer-line-1 .support-link {
+        color: var(--text-primary);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        cursor: pointer;
+      }
+
+      .footer-line-1 .support-link:hover {
+        color: var(--text-secondary);
+      }
+
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        backdrop-filter: blur(4px);
+      }
+
+      .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: var(--surface);
+        border: 1px solid;
+        border-image: linear-gradient(to right, transparent, var(--border), transparent) 1;
+        border-radius: 0.75rem;
+        padding: 2rem;
+        max-width: 600px;
+        width: 90%;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content-small {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+      }
+
+      .modal-content-small::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .modal-content-small::-webkit-scrollbar-track {
+        background: var(--surface-elevated);
+        border-radius: 4px;
+      }
+
+      .modal-content-small::-webkit-scrollbar-thumb {
+        background-color: var(--border);
+        border-radius: 4px;
+        border: 2px solid var(--surface-elevated);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .modal-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        cursor: pointer;
+        padding: 0;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        line-height: 1;
+        background-color: var(--surface-elevated);
+        border: 1px solid var(--border);
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 500;
+        position: relative;
+        transform: translateY(-1px);
+      }
+
+      .modal-close:hover {
+        color: var(--text-primary);
+      }
+
+      .modal-text {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .modal-text>* {
+        margin-bottom: 1.25rem;
+      }
+
+      .modal-text>*:last-child {
+        margin-bottom: 0;
+      }
+
+      .modal-source {
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .modal-detail-section {
+        margin-bottom: 1rem;
+      }
+
+      .modal-detail-label {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .modal-detail-value {
+        color: var(--text-secondary);
+        margin-bottom: 0.75rem;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .modal-detail-value.no-margin {
+        margin-bottom: 0;
+      }
+
+      .info-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        background-color: var(--surface-elevated);
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        color: var(--text-secondary);
+        cursor: pointer;
+        margin-top: 0.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        transition: all 0.2s ease;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .info-icon:hover {
+        color: var(--text-primary);
+      }
+
+      .dropdown-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 15;
+        pointer-events: none;
+      }
+
+      .dropdown-overlay.active {
+        display: block;
+      }
+
+      .custom-dropdown {
+        position: relative;
+        z-index: 20;
+      }
+
+      .dropdown-menu {
+        z-index: 25;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 1.5rem;
+        }
+
+        .controls-results,
+        .share-section {
+          padding: 2rem 1.5rem;
+        }
+
+        .results-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .social-links {
+          gap: 0.75rem;
+        }
+
+        .social-link {
+          width: 44px;
+          height: 44px;
+        }
+
+        .footer-line-1 {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header {
+          margin-bottom: 3rem;
+        }
+
+        .controls-results,
+        .share-section {
+          padding: 1.5rem;
+        }
+
+        .results-grid {
+          gap: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="title">redistributed</h1>
+        <p class="subtitle">We have the money to end starvation. <br>We choose not to. </p>
+      </header>
+      <div class="main-content">
+        <section class="controls-results">
+          <h2 class="section-cta">Pick a source, see the impact</h2>
+          <div class="control-section">
+            <div class="control-item">
+              <div class="custom-dropdown">
+                <button id="dropdown-toggle" class="dropdown-toggle"></button>
+                <ul id="dropdown-menu" class="dropdown-menu">
+                  <li data-value="military">Military expenditure</li>
+                  <li data-value="foodwaste">Food loss and waste</li>
+                  <li data-value="taxevasion">Tax abuse</li>
+                  <li data-value="fossilfuel">Fossil fuel support</li>
+                  <li data-value="overallluxury">Overall luxury spending</li>
+                  <li data-value="personalluxury">Personal luxury spending</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="slider-section">
+            <label class="control-label">Percentage to transfer</label>
+            <div class="neuro-slider-container">
+              <div class="neuro-slider" id="neuro-slider">
+                <div class="neuro-track">
+                  <div class="neuro-fill" id="neuro-fill"></div>
+                </div>
+                <div class="neuro-thumb" id="neuro-thumb"></div>
+              </div>
+            </div>
+          </div>
+          <div class="results-grid">
+            <div class="result-item">
+              <div class="result-value" id="transfer-percentage">0.00%</div>
+              <div class="result-label">Resources transferred</div>
+              <div class="info-icon" id="transfer-info">i</div>
+            </div>
+            <div class="result-item">
+              <div class="result-value" id="reduction-value">0.00%</div>
+              <div class="result-label">Impact on starvation</div>
+              <div class="info-icon" id="reduction-info">i</div>
+            </div>
+          </div>
+        </section>
+        <section class="share-section">
+          <h3 class="share-title">Share your results, raise awareness</h3>
+          <div class="social-links">
+            <a href="#" id="twitter-share" class="social-link" title="Share on X" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 512 512">
+                <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
+              </svg>
+            </a>
+            <a href="#" id="facebook-share" class="social-link" title="Share on Facebook" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 512 512">
+                <path fill="currentColor" d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z" />
+              </svg>
+            </a>
+            <a href="#" id="linkedin-share" class="social-link" title="Share on LinkedIn" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z" />
+              </svg>
+            </a>
+          </div>
+        </section>
+      </div>
+      <footer class="footer">
+        <div class="footer-links">
+          <div class="footer-line-1">
+            <a href="#" id="about-link">The math</a>
+            <span>&bull;</span>
+            <a href="#" id="support-link">Support this project</a>
+            <span>&bull;</span>
+            <a href="mailto:redistributed.net@gmail.com">Contact</a>
+          </div>
+          <div class="footer-line-2">© 2025 redistributed</div>
+        </div>
+      </footer>
+    </div>
+    <div id="about-modal" class="modal-overlay">
+      <div class="modal-content modal-content-small">
+        <div class="modal-header">
+          <h3 class="modal-title">The math</h3>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-text">
+          <p>A fraction – typically less than 1% – of these global resources could end starvation.</p>
+          <div class="modal-detail-section">
+            <div class="modal-detail-label">Calculation</div>
+            <div class="modal-detail-value no-margin">Transferred resources (%) ÷ Annual cost of feeding the target population = Impact on starvation (%)</div>
+          </div>
+          <div class="modal-detail-section">
+            <div class="modal-detail-label">Target population</div>
+            <div class="modal-detail-value">37 million people experiencing IPC Phase 4 (Emergency) and Phase 5 (Catastrophe) food insecurity, according to FSIN (Food Security Information Network)</div>
+          </div>
+          <div class="modal-detail-section">
+            <div class="modal-detail-label">Daily cost per person</div>
+            <div class="modal-detail-value">US$0.50 (one meal per day), according to WFP (UN World Food Programme)</div>
+          </div>
+          <div class="modal-detail-section">
+            <div class="modal-detail-label">Total annual cost</div>
+            <div class="modal-detail-value">US$6.75 billion (37M × 0.50 × 365)</div>
+          </div>
+          <p>All sources use the most recent data from respected international organizations.</p>
+        </div>
+      </div>
+    </div>
+    <div id="transfer-modal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Resources transferred</h3>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-text">
+          <div class="modal-detail-section">
+            <div class="modal-detail-label" id="transfer-name"></div>
+            <div class="modal-detail-value" id="transfer-includes"></div>
+          </div>
+          <div class="modal-detail-section">
+            <div class="modal-detail-label">Value</div>
+            <div class="modal-detail-value" id="transfer-value"></div>
+          </div>
+          <div class="modal-detail-section">
+            <div class="modal-detail-label">Source</div>
+            <div class="modal-detail-value" id="transfer-source"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="reduction-modal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Impact on starvation</h3>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-text">
+          <div class="modal-detail-section">
+            <div class="modal-detail-label">Impact</div>
+            <div class="modal-detail-value">Percentage of starvation addressed</div>
+          </div>
+          <div class="modal-detail-section">
+            <div class="modal-detail-label">Starvation</div>
+            <div class="modal-detail-value">IPC Phase 4 (Emergency) and Phase 5 (Catastrophe)</div>
+          </div>
+          <div class="modal-detail-section">
+            <div class="modal-detail-label">Source</div>
+            <div class="modal-detail-value">FSIN (Food Security Information Network)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="support-modal" class="modal-overlay">
+      <div class="modal-content modal-content-small">
+        <div class="modal-header">
+          <h3 class="modal-title">Support this project</h3>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-text">
+          <p>Built independently to show what's possible. Your <a href="https://buy.stripe.com/test_aFa8wI5vN9F45Ri8bl7EQ00" target="_blank" rel="noopener" style="color: var(--text-primary); text-decoration: none;">contribution</a> keeps this work going. </p>
+        </div>
+      </div>
+    </div>
+    <div id="thankyou-modal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Thank you</h3>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-text">
+          <p>Thank you for your contribution. Your generosity doesn't go unnoticed.</p>
+        </div>
+      </div>
+    </div>
+    <script>
+      const transferPercentageDiv = document.getElementById('transfer-percentage');
+      const reductionValueDiv = document.getElementById('reduction-value');
+      document.addEventListener('DOMContentLoaded', () => {
+        const slider = document.getElementById('neuro-slider');
+        const dropdownOverlay = document.createElement('div');
+        dropdownOverlay.className = 'dropdown-overlay';
+        document.body.appendChild(dropdownOverlay);
+        const thumb = document.getElementById('neuro-thumb');
+        const fill = document.getElementById('neuro-fill');
+        const twitterShareBtn = document.getElementById('twitter-share');
+        const facebookShareBtn = document.getElementById('facebook-share');
+        const linkedinShareBtn = document.getElementById('linkedin-share');
+        const dropdownToggle = document.getElementById('dropdown-toggle');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+        const modals = {
+          transfer: document.getElementById('transfer-modal'),
+          reduction: document.getElementById('reduction-modal'),
+          support: document.getElementById('support-modal'),
+          about: document.getElementById('about-modal')
+        };
+        const transferName = document.getElementById('transfer-name');
+        const transferIncludes = document.getElementById('transfer-includes');
+        const transferValue = document.getElementById('transfer-value');
+        const transferSource = document.getElementById('transfer-source');
+        const data = {
+          financialSources: {
+            military: {
+              name: "Military expenditure",
+              shareableName: "military spending",
+              total: 2718000000000,
+              includes: "Personnel, operations and maintenance, procurement, military research and development, military construction, military aid",
+              value: "US$2.718 trillion",
+              source: "SIPRI (Stockholm International Peace Research Institute)"
+            },
+            foodwaste: {
+              name: "Food loss and waste",
+              shareableName: "food waste",
+              total: 1000000000000,
+              includes: "Food loss along the food supply chain from harvest up to, but not including, the retail level < br > Food waste at the retail and consumption levels ",
+              value: "US$1.0 trillion",
+              source: "FAO (Food and Agriculture Organization of the United Nations), UNEP (UN Environment Programme)"
+            },
+            taxevasion: {
+              name: "Tax abuse",
+              shareableName: "tax abuse",
+              total: 492000000000,
+              includes: "Multinational corporations and wealthy individuals using tax havens to underpay tax",
+              value: "US$492 billion",
+              source: "Tax Justice Network"
+            },
+            fossilfuel: {
+              name: "Fossil fuel support",
+              shareableName: "fossil fuel support",
+              total: 513253000000,
+              includes: "Budgetary transfers and tax expenditures that provide a benefit or preference for fossil-fuel production or consumption",
+              value: "US$513.253 billion",
+              source: "OECD (The Organisation for Economic Co-operation and Development)"
+            },
+            overallluxury: {
+              name: "Overall luxury spending",
+              shareableName: "luxury spending",
+              total: 1602000000000,
+              includes: "Luxury cars, personal luxury goods, luxury hospitality, fine wines and spirits, gourmet food and fine dining, high-end furniture and housewares, fine art, private jets and yachts, luxury cruises",
+              value: "€1.48 trillion (US$1.602 trillion)",
+              source: "Bain & Company, Fondazione Altagamma",
+              conversionNote: "EUR values converted to USD using 2024 average exchange rate (1.0822)"
+            },
+            personalluxury: {
+              name: "Personal luxury spending",
+              shareableName: "personal luxury spending",
+              total: 393000000000,
+              includes: "Beauty, leather, apparel, watches, jewelry, shoes, other accessories (including eyewear)",
+              value: "€363 billion (US$393 billion)",
+              source: "Bain & Company, Fondazione Altagamma",
+              conversionNote: "EUR values converted to USD using 2024 average exchange rate (1.0822)"
+            }
+          },
+          acuteHunger: {
+            peopleInNeed: 37000000,
+            dailyCostPerPerson: 0.50
+          },
+          daysInYear: 365
+        };
+        let currentPercentage = 0;
+        let isDragging = false;
+
+        function setupNeuroSlider() {
+          function updateSlider(percentage) {
+            currentPercentage = percentage;
+            thumb.style.left = `${percentage}%`;
+            fill.style.width = `${percentage}%`;
+            calculateImpact();
+          }
+
+          function getPercentageFromEvent(e, containerRect) {
+            const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            const x = clientX - containerRect.left;
+            const percentage = Math.max(0, Math.min(100, (x / containerRect.width) * 100));
+            return Math.round(percentage);
+          }
+
+          function startDrag(e) {
+            e.preventDefault();
+            isDragging = true;
+            const containerRect = slider.getBoundingClientRect();
+            const percentage = getPercentageFromEvent(e, containerRect);
+            updateSlider(percentage);
+          }
+
+          function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            const containerRect = slider.getBoundingClientRect();
+            const percentage = getPercentageFromEvent(e, containerRect);
+            updateSlider(percentage);
+          }
+
+          function endDrag() {
+            isDragging = false;
+          }
+          // Event listeners
+          slider.addEventListener('mousedown', startDrag);
+          document.addEventListener('mousemove', drag);
+          document.addEventListener('mouseup', endDrag);
+          slider.addEventListener('touchstart', startDrag);
+          document.addEventListener('touchmove', drag);
+          document.addEventListener('touchend', endDrag);
+        }
+
+        function loadFromURL() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const source = urlParams.get('source');
+          const percentage = urlParams.get('percentage');
+          if (source && data.financialSources[source]) {
+            dropdownToggle.textContent = data.financialSources[source].name;
+            dropdownToggle.dataset.value = source;
+          }
+          if (percentage && !isNaN(percentage) && percentage >= 0 && percentage <= 100) {
+            currentPercentage = parseFloat(percentage);
+            thumb.style.left = `${currentPercentage}%`;
+            fill.style.width = `${currentPercentage}%`;
+          }
+        }
+
+        function updateTransferModal() {
+          const selectedValue = dropdownToggle.dataset.value || 'military';
+          const selectedSource = data.financialSources[selectedValue];
+          transferName.textContent = selectedSource.name;
+          transferIncludes.innerHTML = selectedSource.includes;
+          transferValue.textContent = selectedSource.value;
+          if (selectedSource.conversionNote) {
+            transferSource.innerHTML = selectedSource.source + ' < br > < em style = "font-size: 0.8em; color: var(--text-tertiary);" > ' + selectedSource.conversionNote + ' < /em>';
+          } else {
+            transferSource.textContent = selectedSource.source;
+          }
+        }
+
+        function calculateImpact() {
+          const percentage = currentPercentage;
+          const selectedValue = dropdownToggle.dataset.value || 'military';
+          const selectedSource = data.financialSources[selectedValue];
+          const actualPercentage = percentage / 100;
+          transferPercentageDiv.textContent = actualPercentage >= 10 ? actualPercentage.toFixed(1) + '%' : actualPercentage.toFixed(2) + '%';
+          updateTransferModal();
+          if (percentage === 0) {
+            reductionValueDiv.textContent = '0.00%';
+            return;
+          }
+          const redistributedAmount = selectedSource.total * (actualPercentage / 100);
+          const totalAnnualCost = data.acuteHunger.peopleInNeed * data.acuteHunger.dailyCostPerPerson * data.daysInYear;
+          let reductionPercentage = (redistributedAmount / totalAnnualCost) * 100;
+          let displayPercentage = Math.min(100, reductionPercentage);
+          if (displayPercentage >= 100) {
+            reductionValueDiv.textContent = '100%';
+          } else {
+            reductionValueDiv.textContent = displayPercentage >= 10 ? displayPercentage.toFixed(1) + '%' : displayPercentage.toFixed(2) + '%';
+          }
+          updateSocialLinks();
+        }
+
+        function updateSocialLinks() {
+          const selectedValue = dropdownToggle.dataset.value || 'military';
+          const selectedSource = data.financialSources[selectedValue];
+          const actualPercentage = currentPercentage / 100;
+          const reduction = reductionValueDiv.textContent;
+          const baseUrl = window.location.origin + window.location.pathname;
+          const specificUrl = `${baseUrl}?source=${selectedValue}&percentage=${currentPercentage}`;
+          const url = encodeURIComponent(specificUrl);
+          const shareText = `Just ${actualPercentage.toFixed(2)}% of ${selectedSource.shareableName} could reduce starvation by ${reduction}. We choose not to. Run your own numbers at redistributed.net`;
+          const text = encodeURIComponent(shareText);
+          twitterShareBtn.href = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+          facebookShareBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+          linkedinShareBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+        }
+        let scrollbarWidth = null;
+
+        function getScrollbarWidth() {
+          if (scrollbarWidth !== null) return scrollbarWidth;
+          scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+          if (scrollbarWidth === 0) {
+            const outer = document.createElement('div');
+            outer.style.cssText = 'visibility:hidden;overflow:scroll;position:absolute;top:-9999px;width:100px;height:100px';
+            document.body.appendChild(outer);
+            const inner = document.createElement('div');
+            inner.style.width = '100%';
+            outer.appendChild(inner);
+            scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+            document.body.removeChild(outer);
+          }
+          return scrollbarWidth;
+        }
+
+        function openModal(modal) {
+          const scrollWidth = getScrollbarWidth();
+          if (scrollWidth > 0) {
+            document.body.style.paddingRight = `${scrollWidth}px`;
+          }
+          document.body.style.overflow = 'hidden';
+          modal.style.display = 'block';
+        }
+
+        function closeModal(modal) {
+          document.body.style.paddingRight = '';
+          document.body.style.overflow = 'auto';
+          modal.style.display = 'none';
+        }
+        document.getElementById('transfer-info').addEventListener('click', () => openModal(modals.transfer));
+        document.getElementById('reduction-info').addEventListener('click', () => openModal(modals.reduction));
+        document.getElementById('about-link').addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal(modals.about);
+        });
+        document.getElementById('support-link').addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal(modals.support);
+        });
+        document.querySelectorAll('.modal-close').forEach(closeBtn => {
+          closeBtn.addEventListener('click', (e) => {
+            closeModal(e.target.closest('.modal-overlay'));
+          });
+        });
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal(modal);
+          });
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+              if (modal.style.display === 'block') closeModal(modal);
+            });
+          }
+        });
+        dropdownToggle.addEventListener('click', () => {
+          dropdownMenu.classList.toggle('open');
+          dropdownToggle.classList.toggle('open');
+          dropdownOverlay.classList.toggle('active');
+        });
+        dropdownMenu.addEventListener('click', (e) => {
+          if (e.target.tagName === 'LI') {
+            const selectedValue = e.target.dataset.value;
+            dropdownToggle.textContent = e.target.textContent;
+            dropdownToggle.dataset.value = selectedValue;
+            dropdownMenu.classList.remove('open');
+            dropdownToggle.classList.remove('open');
+            dropdownOverlay.classList.remove('active');
+            calculateImpact();
+            updateSocialLinks();
+          }
+        });
+        document.addEventListener('click', (e) => {
+          if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+            dropdownMenu.classList.remove('open');
+            dropdownToggle.classList.remove('open');
+            dropdownOverlay.classList.remove('active');
+          }
+        });
+        // Initialize
+        setupNeuroSlider();
+        loadFromURL();
+        if (!dropdownToggle.textContent || dropdownToggle.textContent === '') {
+          dropdownToggle.textContent = 'Military expenditure';
+          dropdownToggle.dataset.value = 'military';
+        }
+        calculateImpact();
+        updateSocialLinks();
+      });
+    </script>
+    <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  </body>
+</html>
