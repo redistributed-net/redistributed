@@ -9,18 +9,36 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>redistributed</title>
+    
+    <!-- HTML Meta Tags -->
+    <title>We have the money to end starvation | redistributed</title>
     <meta name="description" content="Interactive calculator showing how small percentages of military spending, tax abuse, or luxury consumption could eliminate starvation. Based on official data.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://redistributed.net">
+    
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://redistributed.net">
+    <meta property="og:type" content="website">
     <meta property="og:title" content="We have the money to end starvation">
     <meta property="og:description" content="Interactive calculator showing how small percentages of military spending, tax abuse, or luxury consumption could eliminate starvation. Based on official data.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://redistributed.net">
     <meta property="og:site_name" content="redistributed">
     <meta property="og:image" content="https://redistributed.net/og-image.jpg">
     <meta property="og:image:width" content="900">
     <meta property="og:image:height" content="900">
+    
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="redistributed.net">
+    <meta property="twitter:url" content="https://redistributed.net">
+    <meta name="twitter:title" content="We have the money to end starvation">
+    <meta name="twitter:description" content="Interactive calculator showing how small percentages of military spending, tax abuse, or luxury consumption could eliminate starvation. Based on official data.">
+    <meta name="twitter:image" content="https://redistributed.net/og-image.jpg">
+    
+    <!-- LinkedIn Meta Tags -->
+    <meta property="og:locale" content="en_US">
+    <meta name="author" content="redistributed">
+    <meta name="linkedin:owner" content="redistributed.net">
+    
     <link rel="preload" href="fonts/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/Prata-Regular.ttf" as="font" type="font/ttf" crossorigin>
     <style>
@@ -950,7 +968,7 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
               name: "Food loss and waste",
               shareableName: "food waste",
               total: 1000000000000,
-              includes: "Food loss along the food supply chain from harvest up to, but not including, the retail level < br > Food waste at the retail and consumption levels ",
+              includes: "Food loss along the food supply chain from harvest up to, but not including, the retail level <br> Food waste at the retail and consumption levels",
               value: "US$1.0 trillion",
               source: "FAO (Food and Agriculture Organization of the United Nations), UNEP (UN Environment Programme)"
             },
@@ -1063,7 +1081,7 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
           transferIncludes.innerHTML = selectedSource.includes;
           transferValue.textContent = selectedSource.value;
           if (selectedSource.conversionNote) {
-            transferSource.innerHTML = selectedSource.source + ' < br > < em style = "font-size: 0.8em; color: var(--text-tertiary);" > ' + selectedSource.conversionNote + ' < /em>';
+            transferSource.innerHTML = selectedSource.source + '<br><em style="font-size: 0.8em; color: var(--text-tertiary);">' + selectedSource.conversionNote + '</em>';
           } else {
             transferSource.textContent = selectedSource.source;
           }
@@ -1202,5 +1220,4 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
     </script>
     <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
   </body>
-
 </html>
