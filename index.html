@@ -11,33 +11,33 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- HTML Meta Tags -->
-    <title>redistributed</title>
-    <meta name="description" content="Interactive calculator showing how small percentages of military spending, tax abuse, or luxury consumption could eliminate starvation. Based on official data.">
+    <title>redistributed | end starvation calculator</title>
+    <meta name="description" content="An interactive calculator that shows how just a fraction — often less than 1% — of military expenditure, tax abuse, or luxury spending could end starvation.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://redistributed.net">
+    <meta name="theme-color" content="#0f0f0f">
     
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://redistributed.net">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="We have the money to end starvation">
-    <meta property="og:description" content="Interactive calculator showing how small percentages of military spending, tax abuse, or luxury consumption could eliminate starvation. Based on official data.">
+    <meta property="og:title" content="redistributed | end starvation calculator">
+    <meta property="og:description" content="An interactive calculator that shows how just a fraction — often less than 1% — of military expenditure, tax abuse, or luxury spending could end starvation.">
     <meta property="og:site_name" content="redistributed">
     <meta property="og:image" content="https://redistributed.net/og-image.jpg">
-    <meta property="og:image:width" content="600">
-    <meta property="og:image:height" content="315">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:domain" content="redistributed.net">
-    <meta property="twitter:url" content="https://redistributed.net">
-    <meta name="twitter:title" content="We have the money to end starvation">
-    <meta name="twitter:description" content="Interactive calculator showing how small percentages of military spending, tax abuse, or luxury consumption could eliminate starvation. Based on official data.">
+    <meta name="twitter:domain" content="redistributed.net">
+    <meta name="twitter:url" content="https://redistributed.net">
+    <meta name="twitter:title" content="redistributed | end starvation calculator">
+    <meta name="twitter:description" content="An interactive calculator that shows how just a fraction — often less than 1% — of military expenditure, tax abuse, or luxury spending could end starvation.">
     <meta name="twitter:image" content="https://redistributed.net/og-image.jpg">
     
-    <!-- LinkedIn Meta Tags -->
+    <!-- Additional Meta Tags -->
     <meta property="og:locale" content="en_US">
     <meta name="author" content="redistributed">
-    <meta name="linkedin:owner" content="redistributed.net">
     
     <link rel="preload" href="fonts/JetBrainsMono-Light.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -845,10 +845,10 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
           <button class="modal-close">&times;</button>
         </div>
         <div class="modal-text">
-          <p>A fraction – typically less than 1% – of these global resources could end starvation.</p>
+          <p>A fraction — often less than 1% — of these global resources could end starvation.</p>
           <div class="modal-detail-section">
             <div class="modal-detail-label">Calculation</div>
-            <div class="modal-detail-value no-margin">Transferred resources (%) ÷ Annual cost of feeding the target population = Impact on starvation (%)</div>
+            <div class="modal-detail-value no-margin">Annual transferred resources (%) ÷ Annual cost of feeding the target population = Impact on starvation (%)</div>
           </div>
           <div class="modal-detail-section">
             <div class="modal-detail-label">Target population</div>
@@ -917,7 +917,7 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
           <button class="modal-close">&times;</button>
         </div>
         <div class="modal-text">
-          <p>Built independently to show what's possible. Your <a href="https://buy.stripe.com/test_aFa8wI5vN9F45Ri8bl7EQ00" target="_blank" rel="noopener" style="color: var(--text-primary); text-decoration: none;">contribution</a> keeps this work going. </p>
+          <p>Built independently to show what's possible.<br>Your <a href="https://buy.stripe.com/test_aFa8wI5vN9F45Ri8bl7EQ00" target="_blank" rel="noopener" style="color: var(--text-primary); text-decoration: none;">contribution</a> keeps this work going. </p>
         </div>
       </div>
     </div>
@@ -928,7 +928,7 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
           <button class="modal-close">&times;</button>
         </div>
         <div class="modal-text">
-          <p>Thank you for your contribution. Your generosity doesn't go unnoticed.</p>
+          <p>Thank you for your contribution.<br>Your generosity doesn't go unnoticed.</p>
         </div>
       </div>
     </div>
@@ -1065,21 +1065,6 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
           document.addEventListener('touchend', endDrag);
         }
 
-        function loadFromURL() {
-  	  const urlParams = new URLSearchParams(window.location.search);
-  	  const source = urlParams.get('source');
-  	  const percentage = urlParams.get('percentage');
-  	  if (source && data.financialSources[source]) {
-    	    dropdownToggle.textContent = data.financialSources[source].name;
-    	    dropdownToggle.dataset.value = source;
-  	}
- 	  if (percentage && !isNaN(percentage) && percentage >= 0 && percentage <= 100) {
-    	    currentPercentage = parseFloat(percentage);
-    	    thumb.style.left = `${currentPercentage}%`;
-    	    fill.style.width = `${currentPercentage}%`;
-  	  }
-	}
-
         function updateTransferModal() {
           const selectedValue = dropdownToggle.dataset.value || 'military';
           const selectedSource = data.financialSources[selectedValue];
@@ -1206,7 +1191,6 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
             dropdownToggle.classList.remove('open');
             dropdownOverlay.classList.remove('active');
             calculateImpact();
-            updateSocialLinks();
           }
         });
         document.addEventListener('click', (e) => {
@@ -1227,7 +1211,6 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
 	fill.style.width = '0%';
 
 	calculateImpact();
-	updateSocialLinks();
       });
     </script>
 	<!-- 100% privacy-first analytics -->
