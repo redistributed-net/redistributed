@@ -917,7 +917,7 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
           <button class="modal-close">&times;</button>
         </div>
         <div class="modal-text">
-          <p>Built independently to show what's possible.<br>Your <a href="https://buy.stripe.com/test_aFa8wI5vN9F45Ri8bl7EQ00" target="_blank" rel="noopener" style="color: var(--text-primary); text-decoration: none;">contribution</a> keeps this work going. </p>
+          <p>Built independently to show what's possible.<br>Your <a href="https://buy.stripe.com/3cI5kF2SA2Rw03wcYf87K00" target="_blank" rel="noopener" style="color: var(--text-primary); text-decoration: none;">contribution</a> keeps this work going. </p>
         </div>
       </div>
     </div>
@@ -935,7 +935,11 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
     <script>
       const transferPercentageDiv = document.getElementById('transfer-percentage');
       const reductionValueDiv = document.getElementById('reduction-value');
-      document.addEventListener('DOMContentLoaded', () => {
+      	document.addEventListener('DOMContentLoaded', () => {
+	  if (window.location.search.includes('thankyou=true')) {
+    	    openModal(document.getElementById('thankyou-modal'));
+    	    window.history.replaceState({}, document.title, window.location.pathname);
+  }
         const slider = document.getElementById('neuro-slider');
         const dropdownOverlay = document.createElement('div');
         dropdownOverlay.className = 'dropdown-overlay';
@@ -1191,6 +1195,7 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
             dropdownToggle.classList.remove('open');
             dropdownOverlay.classList.remove('active');
             calculateImpact();
+	    updateSocialLinks();
           }
         });
         document.addEventListener('click', (e) => {
@@ -1211,12 +1216,9 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
 	fill.style.width = '0%';
 
 	calculateImpact();
-    updateSocialLinks();
       });
     </script>
 	<!-- 100% privacy-first analytics -->
 	<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
   </body>
 </html>
-
-
