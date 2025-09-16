@@ -486,7 +486,7 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
         justify-content: center;
         align-items: center;
         gap: 0.5rem;
-        color: var(--text-primary);
+        color: var(--text-secondary);
         text-transform: uppercase;
         letter-spacing: 0.025em;
         font-weight: 500;
@@ -1174,11 +1174,11 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
           transferName.textContent = selectedSource.name;
           transferIncludes.innerHTML = selectedSource.includes;
           transferValue.textContent = selectedSource.value;
-          if (selectedSource.conversionNote) {
-            transferSource.innerHTML = selectedSource.source + '<br><em style="font-size: 0.8em; color: var(--text-tertiary);">' + selectedSource.conversionNote + '</em>';
-          } else {
-            transferSource.textContent = selectedSource.source;
-          }
+          transferValue.innerHTML = selectedSource.value;
+if (selectedSource.conversionNote) {
+    transferValue.innerHTML += '<br><em style="font-size: 0.8em; color: var(--text-tertiary);">' + selectedSource.conversionNote + '</em>';
+}
+transferSource.textContent = selectedSource.source;
         }
 
         function calculateImpact() {
