@@ -770,7 +770,7 @@
       <div class="container">
          <header class="header">
             <h1 class="title">redistributed</h1>
-            <p class="subtitle">We have the money to end starvation. <br>We choose not to. </p>
+            <p class="subtitle">We have the money to end starvation.<br>We choose not to.</p>
          </header>
          <div class="main-content">
             <section class="controls-results">
@@ -985,7 +985,7 @@
                  name: "Food loss and waste",
                  shareableName: "food waste",
                  total: 1000000000000,
-                 includes: "Food loss along the food supply chain from harvest up to, but not including, the retail level <br> Food waste at the retail and consumption levels",
+                 includes: "Food loss along the food supply chain from harvest up to, but not including, the retail level<br>Food waste at the retail and consumption levels",
                  value: "US$1.0 trillion",
                  source: "FAO (Food and Agriculture Organization of the United Nations), UNEP (UN Environment Programme)"
                },
@@ -1086,8 +1086,8 @@
              transferValue.textContent = selectedSource.value;
              transferValue.innerHTML = selectedSource.value;
          if (selectedSource.conversionNote) {
-         transferValue.innerHTML += '<br><em style="font-size: 0.8em; color: var(--text-tertiary);">' + selectedSource.conversionNote + '</em>';
-         }
+         transferValue.innerHTML += '<br><span style="font-size: 0.8em; color: var(--text-tertiary);">' + selectedSource.conversionNote + '</span>';
+	 }
          transferSource.textContent = selectedSource.source;
            }
          
