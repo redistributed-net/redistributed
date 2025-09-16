@@ -23,7 +23,7 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
     <meta property="og:title" content="redistributed | end starvation calculator">
     <meta property="og:description" content="An interactive calculator that shows how just a fraction — often less than 1% — of military expenditure, tax abuse, or luxury spending could end starvation.">
     <meta property="og:site_name" content="redistributed">
-    <meta property="og:image" content="https://redistributed.net/end-starvation-calculator.jpg">
+    <meta property="og:image" content="https://redistributed.net/og-image1.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     
@@ -758,44 +758,98 @@ https://creativecommons.org/licenses/by-nc-nd/4.0/
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "redistributed | end starvation calculator",
-  "url": "https://redistributed.net/",
-  "citation": [
+  "@graph": [
     {
-      "@type": "CreativeWork",
-      "name": "FSIN (Food Security Information Network)",
-      "url": "https://www.fsinplatform.org/"
+      "@type": "WebSite",
+      "name": "redistributed | end starvation calculator",
+      "url": "https://redistributed.net/",
+      "citation": [
+        {
+          "@type": "CreativeWork",
+          "name": "FSIN (Food Security Information Network)",
+          "url": "https://www.fsinplatform.org/"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "WFP (UN World Food Programme)",
+          "url": "https://www.wfp.org/"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "FAO (Food and Agriculture Organization of the United Nations)",
+          "url": "https://www.fao.org/"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "UNEP (UN Environment Programme)",
+          "url": "https://www.unep.org/"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "OECD (The Organisation for Economic Co-operation and Development)",
+          "url": "https://www.oecd.org/"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "SIPRI (Stockholm International Peace Research Institute)",
+          "url": "https://www.sipri.org/"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "Tax Justice Network",
+          "url": "https://taxjustice.net/"
+        }
+      ],
+      "mainEntity": {
+        "@id": "#calculator"
+      }
     },
     {
-      "@type": "CreativeWork",
-      "name": "WFP (UN World Food Programme)",
-      "url": "https://www.wfp.org/"
+      "@type": "SoftwareApplication",
+      "@id": "#calculator",
+      "name": "End Starvation Calculator",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Web Browser",
+      "description": "An interactive calculator that shows how just a fraction — often less than 1% — of military expenditure, tax abuse, or luxury spending could end starvation.",
+      "url": "https://redistributed.net/",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
     },
     {
-      "@type": "CreativeWork",
-      "name": "FAO (Food and Agriculture Organization of the United Nations)",
-      "url": "https://www.fao.org/"
-    },
-    {
-      "@type": "CreativeWork",
-      "name": "UNEP (UN Environment Programme)",
-      "url": "https://www.unep.org/"
-    },
-    {
-      "@type": "CreativeWork",
-      "name": "OECD (The Organisation for Economic Co-operation and Development)",
-      "url": "https://www.oecd.org/"
-    },
-    {
-      "@type": "CreativeWork",
-      "name": "SIPRI (Stockholm International Peace Research Institute)",
-      "url": "https://www.sipri.org/"
-    },
-    {
-      "@type": "CreativeWork",
-      "name": "Tax Justice Network",
-      "url": "https://taxjustice.net/"
+      "@type": "HowTo",
+      "name": "How to Use the calculator",
+      "description": "Follow these simple steps.",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "USD",
+        "value": "0"
+      },
+      "subjectOf": {
+          "@id": "#calculator"
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Pick a source",
+          "text": "Choose between military expenditure, food loss and waste, tax abuse, fossil fuel support, overall luxury spending, or personal luxury spending.",
+          "url": "https://redistributed.net/#step1"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Select a percentage to transfer",
+          "text": "Use the slider to choose a percentage of the total source funds to be redistributed.",
+          "url": "https://redistributed.net/#step2"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Share your results",
+          "text": "See the calculated impact on global starvation, then share your finding to spread awareness.",
+          "url": "https://redistributed.net/#step-results"
+        }
+      ]
     }
   ]
 }
