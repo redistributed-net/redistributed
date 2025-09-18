@@ -663,7 +663,7 @@
   
   	 .control-label {
     	 margin-bottom: 1rem;
-    	 max-width: none;
+    	 max-width: 280px;
     	 font-size: 0.7rem;
   	 }
   
@@ -753,8 +753,17 @@
     	 width: 95%;
   	 }
   
-  	 .modal-content-small {
+	 .modal-content-small {
     	 max-height: calc(100vh - 2rem);
+  	 }
+
+  	 .footer-line-1 a:not(:last-child)::after {
+    	 content: '';
+    	 display: block;
+    	 width: 25px;
+    	 height: 1px;
+    	 background-color: var(--text-tertiary);
+    	 margin: 0.4rem auto;
   	 }
       }
 
@@ -801,6 +810,10 @@
     	 width: 44px;
     	 height: 44px;
   	 }
+
+	 .control-label {
+      	 max-width: 260px;
+      	 }
       }
       </style>
       <script type="application/ld+json">
