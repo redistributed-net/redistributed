@@ -172,7 +172,7 @@
          flex-direction: column;
          align-items: center;
          width: 100%;
-         max-width: 280px;
+         max-width: 294px;
          }
          .custom-dropdown {
          position: relative;
@@ -762,6 +762,7 @@
          width: 92%;
          max-width: 500px;
          }
+	 }
 
 	 @media (max-width: 480px) {
   	 .container {
@@ -817,7 +818,7 @@
        width: 95%;
        padding: 1.5rem;
      }
-      }
+     }
      </style>
       <script type="application/ld+json">
          {
@@ -1184,6 +1185,12 @@
              },
              daysInYear: 365
            };
+	   function getMaxPercentageForSource(sourceKey) {
+	     const source = data.financialSources[sourceKey];
+  	     const totalAnnualCost = data.acuteHunger.peopleInNeed * data.acuteHunger.dailyCostPerPerson * data.daysInYear;
+  	     const maxPercentage = (totalAnnualCost / source.total) * 100;
+  	     return maxPercentage;
+	   }
            let currentPercentage = 0;
          if (window.location.search) {
          window.history.replaceState({}, document.title, window.location.pathname);
@@ -1193,17 +1200,24 @@
            function setupNeuroSlider() {
              function updateSlider(percentage) {
                currentPercentage = percentage;
-               thumb.style.left = `${percentage}%`;
-               fill.style.width = `${percentage}%`;
+               const selectedValue = dropdownToggle.dataset.value || 'military';
+	       const maxPercentage = getMaxPercentageForSource(selectedValue);
+	       const sliderPosition = (percentage / maxPercentage) * 100;
+	       thumb.style.left = `${sliderPosition}%`;
+	       fill.style.width = `${sliderPosition}%`;
                calculateImpact();
              }
          
              function getPercentageFromEvent(e, containerRect) {
-               const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-               const x = clientX - containerRect.left;
-               const percentage = Math.max(0, Math.min(100, (x / containerRect.width) * 100));
-               return Math.round(percentage);
-             }
+  	     const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+  	     const x = clientX - containerRect.left;
+  	     const sliderPosition = Math.max(0, Math.min(100, (x / containerRect.width) * 100));
+  
+  	     const selectedValue = dropdownToggle.dataset.value || 'military';
+  	     const maxPercentage = getMaxPercentageForSource(selectedValue);
+  
+  	     return (sliderPosition / 100) * maxPercentage;
+	     }
          
              function startDrag(e) {
                e.preventDefault();
@@ -1246,13 +1260,12 @@
            }
          
            function calculateImpact() {
-             const percentage = currentPercentage;
              const selectedValue = dropdownToggle.dataset.value || 'military';
              const selectedSource = data.financialSources[selectedValue];
-             const actualPercentage = percentage / 100;
+             const actualPercentage = currentPercentage;
              transferPercentageDiv.textContent = actualPercentage >= 10 ? actualPercentage.toFixed(1) + '%' : actualPercentage.toFixed(2) + '%';
              updateTransferModal();
-             if (percentage === 0) {
+             if (actualPercentage === 0) {
                reductionValueDiv.textContent = '0.00%';
                return;
              }
@@ -1260,7 +1273,7 @@
              const totalAnnualCost = data.acuteHunger.peopleInNeed * data.acuteHunger.dailyCostPerPerson * data.daysInYear;
              let reductionPercentage = (redistributedAmount / totalAnnualCost) * 100;
              let displayPercentage = Math.min(100, reductionPercentage);
-             if (displayPercentage >= 100) {
+             if (displayPercentage >= 99.99) {
                reductionValueDiv.textContent = '100%';
              } else {
                reductionValueDiv.textContent = displayPercentage >= 10 ? displayPercentage.toFixed(1) + '%' : displayPercentage.toFixed(2) + '%';
@@ -1281,7 +1294,14 @@
          
          facebookShareBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
          linkedinShareBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-         }  
+         }
+	 function resetSliderForNewSource() {
+	 currentPercentage = 0;
+	 thumb.style.left = '0%';
+	 fill.style.width = '0%';
+	 calculateImpact();
+	 }
+  
            let scrollbarWidth = null;
          
            function getScrollbarWidth() {
@@ -1354,8 +1374,8 @@
                dropdownMenu.classList.remove('open');
                dropdownToggle.classList.remove('open');
                dropdownOverlay.classList.remove('active');
-               calculateImpact();
-         updateSocialLinks();
+               resetSliderForNewSource();
+               updateSocialLinks();
              }
            });
            document.addEventListener('click', (e) => {
@@ -1378,4 +1398,3 @@
       </script>
    </body>
 </html>
-
