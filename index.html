@@ -80,19 +80,17 @@
          vertical-align: -0.125em;
          }
          :root {
-         --bg: #0f0f0f;
-         --surface: #1a1a1a;
-         --surface-elevated: #232323;
-         --text-primary: #ffffff;
-         --text-secondary: #b0b0b0;
-         --text-tertiary: #7a7a7a;
-         --border: #2a2a2a;
-         --border-subtle: #1f1f1f;
-         --shadow-dark: rgba(0, 0, 0, 0.5);
-         --shadow-light: rgba(255, 255, 255, 0.05);
-         --fill-color: rgba(255, 255, 255, 0.5);
-         --track-height: 6px;
-         }
+	 --bg: #0a0a0a;
+	 --surface: #1a1a1a;
+	 --text-primary: #ffffff;
+	 --text-secondary: #bbbbbb;
+	 --text-tertiary: #888888;
+	 --border: #333333;
+	 --fill-color: rgba(255, 255, 255, 0.5);
+	 --shadow-dark: rgba(0, 0, 0, 0.6);
+	 --shadow-light: rgba(255, 255, 255, 0.06);
+	 --track-height: 6px;
+	 }
          * {
          margin: 0;
          padding: 0;
@@ -155,8 +153,7 @@
          }
          .controls-results {
          background-color: var(--surface);
-         border: 1px solid;
-         border-image: linear-gradient(to right, transparent, var(--border), transparent) 1;
+         border: 1px solid var(--border);
          border-radius: 1rem;
          padding: clamp(1.5rem, 4vw, 3rem);
          margin-bottom: 2rem;
@@ -181,9 +178,8 @@
          .dropdown-toggle {
          width: 100%;
          padding: 1rem 1.25rem;
-         background-color: var(--surface-elevated);
-         border: 1px solid;
-         border-image: linear-gradient(to right, transparent, var(--border), transparent) 1;
+         background-color: var(--surface);
+         border: 1px solid var(--border);
          border-radius: 0.5rem;
          color: var(--text-primary);
          font-size: 1rem;
@@ -214,9 +210,8 @@
          left: 0;
          width: 100%;
          list-style: none;
-         background-color: var(--surface-elevated);
-         border: 1px solid;
-         border-image: linear-gradient(to right, transparent, var(--border), transparent) 1;
+         background-color: var(--surface);
+	 border: 1px solid var(--border);
          border-radius: 0.5rem;
          padding: 0.5rem 0;
          z-index: 10;
@@ -232,13 +227,13 @@
          }
          .dropdown-menu li {
          padding: 0.5rem 1.25rem;
-         color: var(--text-primary);
+         color: var(--text-secondary);
          cursor: pointer;
          text-align: center;
-         transition: background-color 0.2s ease;
+         transition: color 0.2s ease;
          }
          .dropdown-menu li:hover {
-         background-color: var(--surface);
+         color: var(--text-primary);
          }
          .control-label {
          display: block;
@@ -371,8 +366,7 @@
          }
          .share-section {
          background-color: var(--surface);
-         border: 1px solid;
-         border-image: linear-gradient(to right, transparent, var(--border), transparent) 1;
+         border: 1px solid var(--border);
          border-radius: 1rem;
          padding: clamp(1.5rem, 4vw, 3rem);
          text-align: center;
@@ -396,7 +390,7 @@
          justify-content: center;
          width: 48px;
          height: 48px;
-         background-color: var(--surface-elevated);
+         background-color: var(--surface);
          border: 1px solid var(--border);
          border-radius: 0.5rem;
          color: var(--text-secondary);
@@ -408,7 +402,7 @@
          color: var(--text-primary);
          }
          .footer {
-         margin-top: 2rem;
+         margin-top: 0rem;
          text-align: center;
          padding-top: 1.5rem;
          }
@@ -476,13 +470,12 @@
          left: 50%;
          transform: translate(-50%, -50%);
          background-color: var(--surface);
-         border: 1px solid;
-         border-image: linear-gradient(to right, transparent, var(--border), transparent) 1;
-         border-radius: 0.75rem;
-         padding: 2rem;
-         max-width: 600px;
-         width: 90%;
-         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+         border: 1px solid var(--border);
+    	 border-radius: 0.75rem;
+    	 padding: 2rem;
+    	 max-width: 600px;
+    	 width: 90%;
+    	 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
          }
          .modal-content-small {
          top: 50%;
@@ -580,7 +573,7 @@
          justify-content: center;
          width: 30px;
          height: 30px;
-         background-color: var(--surface-elevated);
+         background-color: var(--surface);
          border: 1px solid var(--border);
          border-radius: 50%;
          color: var(--text-secondary);
@@ -726,10 +719,6 @@
     	 height: 48px;
   	 }
   
-         .footer {
-         margin-top: 0rem;
-         }
-
          .footer-line-1 {
          flex-direction: row;
          flex-wrap: wrap;
