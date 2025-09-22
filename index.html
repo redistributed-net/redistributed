@@ -93,6 +93,8 @@
 	 --shadow-dark: rgba(0, 0, 0, 0.6);
 	 --shadow-light: rgba(255, 255, 255, 0.06);
 	 --track-height: 6px;
+	 --font-size-support: 0.8rem;
+         --font-size-tertiary: 0.8rem;
 	 }
          * {
          margin: 0;
@@ -243,7 +245,7 @@
          display: block;
          width: 100%;
          max-width: 200px;
-         font-size: 0.75rem;
+         font-size: var(--font-size-support);
          font-weight: 500;
          color: var(--text-secondary);
          text-transform: uppercase;
@@ -350,7 +352,7 @@
          display: block;
          width: 100%;
          max-width: 200px;
-         font-size: 0.75rem;
+         font-size: var(--font-size-support);
          font-weight: 500;
          color: var(--text-secondary);
          text-transform: uppercase;
@@ -434,6 +436,10 @@
          justify-content: center;
          line-height: 1;
          font-size: 0.8rem;
+         }
+         .conversion-note {
+         font-size: var(--font-size-tertiary);
+         color: var(--text-tertiary);
          }
          .footer-links a {
          color: var(--text-secondary);
@@ -533,6 +539,9 @@
          .modal-close:hover {
          color: var(--text-primary);
          }
+         .icon-button {
+         font-size: 1.25rem;
+         }
          .modal-text {
          color: var(--text-secondary);
          line-height: 1.6;
@@ -625,6 +634,12 @@
     	 font-size: 0.9rem;
     	 margin-bottom: 2rem;
   	 }
+
+         .control-label,
+         .result-label,
+         .footer-line-1 a {
+         font-size: clamp(11px, 2.5vw, 13px);
+         }
   
   	 .controls-results {
     	 padding: 2rem 1.5rem;
@@ -647,7 +662,6 @@
   	 .control-label {
   	 margin-bottom: 1rem;
   	 max-width: 220px;
-  	 font-size: 0.7rem;
   	 padding: 0.5rem 0.75rem;
 	 }
   
@@ -692,7 +706,6 @@
   	 .result-label {
     	 margin: 0;
     	 max-width: 220px;
-    	 font-size: 0.7rem;
   	 }
   
   	 .info-icon {
@@ -731,7 +744,7 @@
          }
 
          .footer-line-1 a {
-         font-size: clamp(11px, 2.5vw, 13px);
+         font-size: var(--font-size-support);
          line-height: 1.4;
          }
 
@@ -949,7 +962,7 @@
                   <div class="result-item">
                      <div class="result-value" id="transfer-percentage">0.00%</div>
                      <div class="result-label">Resources transferred</div>
-                     <div class="info-icon" id="transfer-info">i</div>
+                     <div class="info-icon icon-button" id="transfer-info">i</div>
                   </div>
                   <div class="result-item">
                      <div class="result-value" id="reduction-value">0.00%</div>
@@ -996,7 +1009,7 @@
          <div class="modal-content modal-content-small">
             <div class="modal-header">
                <h3 class="modal-title">The math</h3>
-               <button class="modal-close">&times;</button>
+               <button class="modal-close icon-button">&times;</button>
             </div>
             <div class="modal-text">
                <p>A fraction — often less than 1% — of these global resources could end starvation.</p>
@@ -1243,7 +1256,7 @@
              transferValue.textContent = selectedSource.value;
              transferValue.innerHTML = selectedSource.value;
          if (selectedSource.conversionNote) {
-         transferValue.innerHTML += '<br><span style="font-size: 0.8em; color: var(--text-tertiary);">' + selectedSource.conversionNote + '</span>';
+         transferValue.innerHTML += '<br><span class="conversion-note">' + selectedSource.conversionNote + '</span>';
 	 }
          transferSource.textContent = selectedSource.source;
            }
