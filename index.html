@@ -21,7 +21,7 @@
       <meta name="twitter:url" content="https://redistributed.net">
       <meta name="twitter:title" content="redistributed | end starvation calculator">
       <meta name="twitter:description" content="An interactive calculator that shows how just a fraction — often less than 1% — of military expenditure, tax abuse, or luxury spending could end starvation.">
-      <meta name="twitter:image" content="https://redistributed.net/end-starvation-calculator.jpg>
+      <meta name="twitter:image" content="https://redistributed.net/end-starvation-calculator.jpg">
       <meta property="og:locale" content="en_US">
       <meta name="author" content="redistributed">
       <link rel="preload" href="fonts/JetBrainsMono-Light.woff2" as="font" type="font/woff2" crossorigin>
@@ -518,7 +518,6 @@
          background: none;
          border: none;
          color: var(--text-secondary);
-         font-size: 1.1rem;
          cursor: pointer;
          padding: 0;
          border-radius: 50%;
@@ -531,8 +530,6 @@
          line-height: 1;
          background-color: var(--surface-elevated);
          border: 1px solid var(--border);
-         font-family: 'JetBrains Mono', monospace;
-         font-weight: 500;
          position: relative;
          transform: translateY(-1px);
          }
@@ -540,8 +537,10 @@
          color: var(--text-primary);
          }
          .icon-button {
-         font-size: 1.25rem;
-         }
+	 font-family: 'JetBrains Mono', monospace;
+	 font-size: 1rem;
+	 font-weight: 500;
+	 }
          .modal-text {
          color: var(--text-secondary);
          line-height: 1.6;
@@ -591,9 +590,6 @@
          margin-left: auto;
          margin-right: auto;
          transition: all 0.2s ease;
-         font-family: 'JetBrains Mono', monospace;
-         font-size: 0.875rem;
-         font-weight: 500;
          }
          .info-icon:hover {
          color: var(--text-primary);
@@ -630,10 +626,14 @@
     	 margin-bottom: 3rem;
 	 }
   
-  	 .section-cta {
-    	 font-size: 0.9rem;
-    	 margin-bottom: 2rem;
-  	 }
+  	 .section-cta,
+	 .share-title {
+  	 font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+	 }
+
+	 .section-cta {
+  	 margin-bottom: 2rem;
+	 }
 
          .control-label,
          .result-label,
@@ -719,9 +719,8 @@
   	 }
   
   	 .share-title {
-    	 font-size: 0.9rem;
-    	 margin-bottom: 1.5rem;
-  	 }
+  	 margin-bottom: 1.5rem;
+	 }
   
   	 .social-links {
     	 gap: 1rem;
@@ -736,7 +735,6 @@
          flex-direction: row;
          flex-wrap: wrap;
          justify-content: center;
-         gap: 0.5rem;
          }
 
          .footer-line-1 span {
@@ -1037,7 +1035,7 @@
          <div class="modal-content">
             <div class="modal-header">
                <h3 class="modal-title">Resources transferred</h3>
-               <button class="modal-close">&times;</button>
+               <button class="modal-close icon-button">&times;</button>
             </div>
             <div class="modal-text">
                <div class="modal-detail-section">
@@ -1059,7 +1057,7 @@
          <div class="modal-content">
             <div class="modal-header">
                <h3 class="modal-title">Impact on starvation</h3>
-               <button class="modal-close">&times;</button>
+               <button class="modal-close icon-button">&times;</button>
             </div>
             <div class="modal-text">
                <div class="modal-detail-section">
@@ -1081,7 +1079,7 @@
          <div class="modal-content modal-content-small">
             <div class="modal-header">
                <h3 class="modal-title">Support this project</h3>
-               <button class="modal-close">&times;</button>
+               <button class="modal-close icon-button">&times;</button>
             </div>
             <div class="modal-text">
                <p>This is an advocacy project. Your <a href="https://buy.stripe.com/3cI5kF2SA2Rw03wcYf87K00" target="_blank" rel="noopener" style="color: var(--text-primary); text-decoration: none;">support</a> helps keep the tool running, update data, and expand its reach.</p>
@@ -1092,7 +1090,7 @@
          <div class="modal-content">
             <div class="modal-header">
                <h3 class="modal-title">Thank you</h3>
-               <button class="modal-close">&times;</button>
+               <button class="modal-close icon-button">&times;</button>
             </div>
             <div class="modal-text">
                <p>Thank you for your support. It doesn't go unnoticed.</p>
@@ -1253,7 +1251,6 @@
              const selectedSource = data.financialSources[selectedValue];
              transferName.textContent = selectedSource.name;
              transferIncludes.innerHTML = selectedSource.includes;
-             transferValue.textContent = selectedSource.value;
              transferValue.innerHTML = selectedSource.value;
          if (selectedSource.conversionNote) {
          transferValue.innerHTML += '<br><span class="conversion-note">' + selectedSource.conversionNote + '</span>';
