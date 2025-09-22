@@ -168,7 +168,7 @@
          flex-direction: column;
          align-items: center;
          width: 100%;
-         max-width: 294px;
+         max-width: 290px;
          }
          .custom-dropdown {
          position: relative;
@@ -231,10 +231,12 @@
          text-align: center;
          transition: color 0.2s ease;
          }
+	 @media (hover: hover) and (pointer: fine) {
          .dropdown-menu li:hover {
          color: var(--text-primary);
          }
-         .control-label {
+         }
+	 .control-label {
          display: block;
          width: 100%;
          max-width: 200px;
@@ -396,9 +398,11 @@
          font-size: 1.25rem;
          transition: all 0.2s ease;
          }
-         .social-link:hover {
-         color: var(--text-primary);
-         }
+         @media (hover: hover) and (pointer: fine) {
+	 .social-link:hover {
+	 color: var(--text-primary);
+	 }
+	 }
          .footer {
          margin-top: 0rem;
          text-align: center;
@@ -634,7 +638,7 @@
   	 }
   
   	 .control-item {
-    	 max-width: 280px;
+    	 max-width: 282px;
   	 }
   
   	 .dropdown-toggle {
@@ -1385,4 +1389,3 @@
       </script>
    </body>
 </html>
-
