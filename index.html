@@ -821,19 +821,13 @@
 	 }
 
 	 @media (hover: none) and (pointer: coarse) {
-    .dropdown-toggle:hover,
-    .dropdown-toggle:active,
-    .dropdown-toggle:focus {
-        background-color: transparent;
-        cursor: default;
-        -webkit-tap-highlight-color: transparent;
-    }
+    .dropdown-toggle,
+    .dropdown-menu li {
+        transition: none !important;
 
-    .dropdown-menu li:hover,
-    .dropdown-menu li:active,
-    .dropdown-menu li:focus {
-        background-color: transparent;
+        background-color: transparent !important;
         -webkit-tap-highlight-color: transparent;
+        cursor: default;
     }
     }
      </style>
@@ -1414,6 +1408,7 @@
       </script>
    </body>
 </html>
+
 
 
 
