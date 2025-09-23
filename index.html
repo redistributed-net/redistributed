@@ -215,7 +215,7 @@
          width: 100%;
          list-style: none;
          background-color: var(--surface);
-	 border: 1px solid var(--border);
+	     border: 1px solid var(--border);
          border-radius: 0.5rem;
          padding: 0.5rem 0;
          z-index: 10;
@@ -537,10 +537,10 @@
          color: var(--text-primary);
          }
          .icon-button {
-	 font-family: 'JetBrains Mono', monospace;
-	 font-size: 1rem;
-	 font-weight: 500;
-	 }
+	     font-family: 'JetBrains Mono', monospace;
+	     font-size: 1rem;
+	     font-weight: 500;
+	     }
          .modal-text {
          color: var(--text-secondary);
          line-height: 1.6;
@@ -818,6 +818,16 @@
      .modal-content-small {
        width: 95%;
        padding: 1.5rem;
+	 }
+
+	 @media (hover: none) and (pointer: coarse) {
+     .dropdown-toggle:hover {
+     background-color: transparent;
+     cursor: default;
+     }
+
+     .dropdown-menu li:hover {
+     background-color: transparent;
      }
      }
      </style>
@@ -1398,6 +1408,7 @@
       </script>
    </body>
 </html>
+
 
 
 
