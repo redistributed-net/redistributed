@@ -781,13 +781,6 @@
          padding: 1.5rem;
          }
          }
-	 .custom-dropdown {
-    	 opacity: 0;
-    	 transition: opacity 0.1s ease;
-	 }
-	 .custom-dropdown.ready {
-    	 opacity: 1;
-	 }
       </style>
       <script type="application/ld+json">
          {
@@ -902,16 +895,18 @@
                <div class="control-section">
                   <div class="control-item">
                      <div class="custom-dropdown">
-                        <button id="dropdown-toggle" class="dropdown-toggle" data-value="military">Military expenditure</button>
-                        <ul id="dropdown-menu" class="dropdown-menu">
-                           <li data-value="military">Military expenditure</li>
-                           <li data-value="foodwaste">Food loss and waste</li>
-                           <li data-value="taxevasion">Tax abuse</li>
-                           <li data-value="fossilfuel">Fossil fuel support</li>
-                           <li data-value="overallluxury">Overall luxury spending</li>
-                           <li data-value="personalluxury">Personal luxury spending</li>
-                        </ul>
-                     </div>
+    <button id="dropdown-toggle" class="dropdown-toggle" data-value="military">
+        <span style="opacity: 1;">Military expenditure</span>
+    </button>
+    <ul id="dropdown-menu" class="dropdown-menu">
+        <li data-value="military">Military expenditure</li>
+        <li data-value="foodwaste">Food loss and waste</li>
+        <li data-value="taxevasion">Tax abuse</li>
+        <li data-value="fossilfuel">Fossil fuel support</li>
+        <li data-value="overallluxury">Overall luxury spending</li>
+        <li data-value="personalluxury">Personal luxury spending</li>
+    </ul>
+</div>
                   </div>
                </div>
                <div class="slider-section">
@@ -1365,7 +1360,6 @@ function updateSocialLinks() {
          calculateImpact();
 
 	 updateSocialLinks();
-         document.querySelector('.custom-dropdown').classList.add('ready');
          });
       </script>
    </body>
