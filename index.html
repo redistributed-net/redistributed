@@ -1242,20 +1242,24 @@
              updateSocialLinks();
            }
          
-           function updateSocialLinks() {
-         const selectedValue = dropdownToggle.dataset.value || 'military';
-         const selectedSource = data.financialSources[selectedValue];
-         const actualPercentage = currentPercentage / 100;
-         const reduction = reductionValueDiv.textContent;
-         
-         const url = encodeURIComponent('https://redistributed.net');
-         
-         const twitterText = encodeURIComponent(`Just ${actualPercentage.toFixed(2)}% of ${selectedSource.shareableName} could reduce starvation by ${reduction}. Run your own numbers at`);
-         twitterShareBtn.href = `https://twitter.com/intent/tweet?text=${twitterText}&url=${url}`;
-         
-         facebookShareBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-         linkedinShareBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-         }
+function updateSocialLinks() {
+    const selectedValue = dropdownToggle.dataset.value || 'military';
+    const selectedSource = data.financialSources[selectedValue];
+    const actualPercentage = currentPercentage;
+    const reduction = reductionValueDiv.textContent;
+    
+    const baseUrl = 'https://redistributed.net';
+    
+    // Twitter
+    const twitterText = `Just ${actualPercentage.toFixed(2)}% of ${selectedSource.shareableName} could reduce starvation by ${reduction}. Run your own numbers at`;
+    twitterShareBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(baseUrl)}`;
+    
+    // Facebook
+    facebookShareBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(baseUrl)}`;
+    
+    // LinkedIn
+    linkedinShareBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(baseUrl)}`;
+}
          function resetSliderForNewSource() {
          currentPercentage = 0;
          thumb.style.left = '0%';
@@ -1353,8 +1357,10 @@
          currentPercentage = 0;
          thumb.style.left = '0%';
          fill.style.width = '0%';
-         
          calculateImpact();
+
+	 updateSocialLinks();
+
          });
       </script>
    </body>
