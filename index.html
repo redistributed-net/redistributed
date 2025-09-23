@@ -895,7 +895,7 @@
                <div class="control-section">
                   <div class="control-item">
                      <div class="custom-dropdown">
-                        <button id="dropdown-toggle" class="dropdown-toggle"></button>
+                        <button id="dropdown-toggle" class="dropdown-toggle" data-value="military">Military expenditure</button>
                         <ul id="dropdown-menu" class="dropdown-menu">
                            <li data-value="military">Military expenditure</li>
                            <li data-value="foodwaste">Food loss and waste</li>
@@ -1352,8 +1352,6 @@ function updateSocialLinks() {
            });
            setupNeuroSlider();
          
-         dropdownToggle.textContent = 'Military expenditure';
-         dropdownToggle.dataset.value = 'military';
          currentPercentage = 0;
          thumb.style.left = '0%';
          fill.style.width = '0%';
