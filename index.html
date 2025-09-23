@@ -83,19 +83,19 @@
          vertical-align: -0.125em;
          }
          :root {
-	 --bg: #0a0a0a;
-	 --surface: #1a1a1a;
-	 --text-primary: #ffffff;
-	 --text-secondary: #bbbbbb;
-	 --text-tertiary: #888888;
-	 --border: #333333;
-	 --fill-color: rgba(255, 255, 255, 0.5);
-	 --shadow-dark: rgba(0, 0, 0, 0.6);
-	 --shadow-light: rgba(255, 255, 255, 0.06);
-	 --track-height: 6px;
-	 --font-size-support: 0.8rem;
+         --bg: #0a0a0a;
+         --surface: #1a1a1a;
+         --text-primary: #ffffff;
+         --text-secondary: #bbbbbb;
+         --text-tertiary: #888888;
+         --border: #333333;
+         --fill-color: rgba(255, 255, 255, 0.5);
+         --shadow-dark: rgba(0, 0, 0, 0.6);
+         --shadow-light: rgba(255, 255, 255, 0.06);
+         --track-height: 6px;
+         --font-size-support: 0.8rem;
          --font-size-tertiary: 0.8rem;
-	 }
+         }
          * {
          margin: 0;
          padding: 0;
@@ -215,7 +215,7 @@
          width: 100%;
          list-style: none;
          background-color: var(--surface);
-	 border: 1px solid var(--border);
+         border: 1px solid var(--border);
          border-radius: 0.5rem;
          padding: 0.5rem 0;
          z-index: 10;
@@ -236,12 +236,12 @@
          text-align: center;
          transition: color 0.2s ease;
          }
-	 @media (hover: hover) and (pointer: fine) {
+         @media (hover: hover) and (pointer: fine) {
          .dropdown-menu li:hover {
          color: var(--text-primary);
          }
          }
-	 .control-label {
+         .control-label {
          display: block;
          width: 100%;
          max-width: 200px;
@@ -402,10 +402,10 @@
          transition: all 0.2s ease;
          }
          @media (hover: hover) and (pointer: fine) {
-	 .social-link:hover {
-	 color: var(--text-primary);
-	 }
-	 }
+         .social-link:hover {
+         color: var(--text-primary);
+         }
+         }
          .footer {
          margin-top: 0rem;
          text-align: center;
@@ -478,10 +478,10 @@
          transform: translate(-50%, -50%);
          background-color: var(--surface);
          border: 1px solid var(--border);
-    	 border-radius: 0.75rem;
-    	 padding: 2rem;
-    	 max-width: 600px;
-    	 width: 90%;
+         border-radius: 0.75rem;
+         padding: 2rem;
+         max-width: 600px;
+         width: 90%;
          }
          .modal-content-small {
          top: 50%;
@@ -537,10 +537,10 @@
          color: var(--text-primary);
          }
          .icon-button {
-	 font-family: 'JetBrains Mono', monospace;
-	 font-size: 1rem;
-	 font-weight: 500;
-	 }
+         font-family: 'JetBrains Mono', monospace;
+         font-size: 1rem;
+         font-weight: 500;
+         }
          .modal-text {
          color: var(--text-secondary);
          line-height: 1.6;
@@ -618,209 +618,170 @@
          z-index: 25;
          }
          @media (max-width: 768px) {
-  	 .container {
-	 padding: 1rem;
-  	 }
-  
-  	 .header {
-    	 margin-bottom: 3rem;
-	 }
-  
-  	 .section-cta,
-	 .share-title {
-  	 font-size: clamp(0.75rem, 1.8vw, 0.85rem);
-	 }
-
-	 .section-cta {
-  	 margin-bottom: 2rem;
-	 }
-
+         .container {
+         padding: 1rem;
+         }
+         .header {
+         margin-bottom: 3rem;
+         }
+         .section-cta,
+         .share-title {
+         font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+         }
+         .section-cta {
+         margin-bottom: 2rem;
+         }
          .control-label,
          .result-label,
          .footer-line-1 a {
          font-size: clamp(10px, 2.2vw, 12px);
          }
-  
-  	 .controls-results {
-    	 padding: 2rem 1.5rem;
-    	 margin-bottom: 1.5rem;
-  	 }
-  
-  	 .control-section {
-    	 margin-bottom: 2rem;
-  	 }
-  
-  	 .control-item {
-    	 max-width: 282px;
-  	 }
-  
-  	 .dropdown-toggle {
-    	 padding: 1.4rem 1.5rem;
-    	 font-size: 0.95rem;
-  	 }
-  
-  	 .control-label {
-  	 margin-bottom: 1rem;
-  	 max-width: 220px;
-  	 padding: 0.5rem 0.75rem;
-	 }
-  
-  	 .slider-section {
-    	 margin-bottom: 2rem;
-    	 gap: 1.5rem;
-  	 }
-  
-  	 .neuro-slider-container {
-    	 max-width: none;
-    	 padding: 0 1.5rem;
-  	 }
-  
-  	 .neuro-thumb {
-    	 width: 32px;
-    	 height: 32px;
-  	 }
-  
-    	 .results-grid {
-    	 display: flex;
-    	 flex-direction: column;
-    	 align-items: center;
-    	 gap: 2rem;
-    	 width: 100%;
-  	 }
-  
-  	 .result-item {
-    	 text-align: center;
-    	 width: 100%;
-    	 max-width: 280px;
-    	 display: flex;
-    	 flex-direction: column;
-    	 align-items: center;
-    	 gap: 0.75rem;
-  	 }
-  
-  	 .result-value {
-    	 font-size: clamp(2.2rem, 8vw, 3.2rem);
-    	 margin-bottom: 0;
-  	 }
-  
-  	 .result-label {
-    	 margin: 0;
-    	 max-width: 220px;
-  	 }
-  
-  	 .info-icon {
-    	 margin: 0;
-    	 width: 28px;
-    	 height: 28px;
-  	 }
-  
-  	 .share-section {
-    	 padding: 2rem 1.5rem;
-  	 }
-  
-  	 .share-title {
-  	 margin-bottom: 1.5rem;
-	 }
-  
-  	 .social-links {
-    	 gap: 1rem;
-  	 }
-  
-  	 .social-link {
-    	 width: 48px;
-    	 height: 48px;
-  	 }
-  
-     .footer-line-1 {
-     flex-direction: row;
-     flex-wrap: nowrap;
-     justify-content: center;
-     gap: 0.3rem;
-     }
-
-     .footer-line-1 span {
-        display: inline;
-     }
-
-     .footer-line-1 a {
-     font-size: 12px;
-     line-height: 1.4;
-     }
-
-     .footer-line-2 {
-     display: none;
-     }
-
-     .modal-content {
-     padding: 2rem;
-     width: 92%;
-     max-width: 500px;
-     }
-
-     .modal-content-small {
-     max-height: calc(100vh - 3rem);
-     padding: 2rem;
-     width: 92%;
-     max-width: 500px;
-     }
-	 }
-
-	 @media (max-width: 480px) {
-  	 .container {
-    	 padding: 0.75rem;
-  	 }
-  
-  	 .header {
-    	 margin-bottom: 2.5rem;
-  	 }
-  
-  	 .controls-results,
-  	 .share-section {
-    	 padding: 1.5rem 1rem;
-  	 }
-  
-  	 .results-grid {
-    	 gap: 1.5rem;
-  	 }
-  
-  	 .result-value {
-    	 font-size: clamp(2rem, 10vw, 2.8rem);
-  	 }
-  
-  	 .result-item {
-    	 max-width: 260px;
-  	 }
-  
-  	 .neuro-slider-container {
-    	 padding: 0 1.5rem;
-  	 }
-  
-  	 .dropdown-toggle {
-    	 padding: 1.4rem 1.25rem;
-    	 font-size: 0.9rem;
-  	 }
-  
-  	 .social-links {
-    	 gap: 0.75rem;
-  	 }
-  
-  	 .social-link {
-    	 width: 44px;
-    	 height: 44px;
-  	 }
-
-	 .control-label {
-  	 max-width: 220px;
-  	 padding: 0.5rem 0.75rem;
-	 }
-      
-     .modal-content,
-     .modal-content-small {
-       width: 95%;
-       padding: 1.5rem;
-     }
-     }
-     </style>
+         .controls-results {
+         padding: 2rem 1.5rem;
+         margin-bottom: 1.5rem;
+         }
+         .control-section {
+         margin-bottom: 2rem;
+         }
+         .control-item {
+         max-width: 282px;
+         }
+         .dropdown-toggle {
+         padding: 1.4rem 1.5rem;
+         font-size: 0.95rem;
+         }
+         .control-label {
+         margin-bottom: 1rem;
+         max-width: 220px;
+         padding: 0.5rem 0.75rem;
+         }
+         .slider-section {
+         margin-bottom: 2rem;
+         gap: 1.5rem;
+         }
+         .neuro-slider-container {
+         max-width: none;
+         padding: 0 1.5rem;
+         }
+         .neuro-thumb {
+         width: 32px;
+         height: 32px;
+         }
+         .results-grid {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 2rem;
+         width: 100%;
+         }
+         .result-item {
+         text-align: center;
+         width: 100%;
+         max-width: 280px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 0.75rem;
+         }
+         .result-value {
+         font-size: clamp(2.2rem, 8vw, 3.2rem);
+         margin-bottom: 0;
+         }
+         .result-label {
+         margin: 0;
+         max-width: 220px;
+         }
+         .info-icon {
+         margin: 0;
+         width: 28px;
+         height: 28px;
+         }
+         .share-section {
+         padding: 2rem 1.5rem;
+         }
+         .share-title {
+         margin-bottom: 1.5rem;
+         }
+         .social-links {
+         gap: 1rem;
+         }
+         .social-link {
+         width: 48px;
+         height: 48px;
+         }
+         .footer-line-1 {
+         flex-direction: row;
+         flex-wrap: nowrap;
+         justify-content: center;
+         gap: 0.3rem;
+         }
+         .footer-line-1 span {
+         display: inline;
+         }
+         .footer-line-1 a {
+         font-size: 12px;
+         line-height: 1.4;
+         }
+         .footer-line-2 {
+         display: none;
+         }
+         .modal-content {
+         padding: 2rem;
+         width: 92%;
+         max-width: 500px;
+         }
+         .modal-content-small {
+         max-height: calc(100vh - 3rem);
+         padding: 2rem;
+         width: 92%;
+         max-width: 500px;
+         }
+         }
+         @media (max-width: 480px) {
+         .container {
+         padding: 0.75rem;
+         }
+         .header {
+         margin-bottom: 2.5rem;
+         }
+         .controls-results,
+         .share-section {
+         padding: 1.5rem 1rem;
+         }
+         .results-grid {
+         gap: 1.5rem;
+         }
+         .result-value {
+         font-size: clamp(2rem, 10vw, 2.8rem);
+         }
+         .result-item {
+         max-width: 260px;
+         }
+         .neuro-slider-container {
+         padding: 0 1.5rem;
+         }
+         .dropdown-toggle {
+         padding: 1.4rem 1.25rem;
+         font-size: 0.9rem;
+         }
+         .social-links {
+         gap: 0.75rem;
+         }
+         .social-link {
+         width: 44px;
+         height: 44px;
+         }
+         .control-label {
+         max-width: 220px;
+         padding: 0.5rem 0.75rem;
+         }
+         .modal-content,
+         .modal-content-small {
+         width: 95%;
+         padding: 1.5rem;
+         }
+         }
+      </style>
       <script type="application/ld+json">
          {
            "@context": "https://schema.org",
@@ -1186,12 +1147,12 @@
              },
              daysInYear: 365
            };
-	   function getMaxPercentageForSource(sourceKey) {
-	     const source = data.financialSources[sourceKey];
-  	     const totalAnnualCost = data.acuteHunger.peopleInNeed * data.acuteHunger.dailyCostPerPerson * data.daysInYear;
-  	     const maxPercentage = (totalAnnualCost / source.total) * 100;
-  	     return maxPercentage;
-	   }
+         function getMaxPercentageForSource(sourceKey) {
+         const source = data.financialSources[sourceKey];
+         const totalAnnualCost = data.acuteHunger.peopleInNeed * data.acuteHunger.dailyCostPerPerson * data.daysInYear;
+         const maxPercentage = (totalAnnualCost / source.total) * 100;
+         return maxPercentage;
+         }
            let currentPercentage = 0;
          if (window.location.search) {
          window.history.replaceState({}, document.title, window.location.pathname);
@@ -1202,23 +1163,23 @@
              function updateSlider(percentage) {
                currentPercentage = percentage;
                const selectedValue = dropdownToggle.dataset.value || 'military';
-	       const maxPercentage = getMaxPercentageForSource(selectedValue);
-	       const sliderPosition = (percentage / maxPercentage) * 100;
-	       thumb.style.left = `${sliderPosition}%`;
-	       fill.style.width = `${sliderPosition}%`;
+         const maxPercentage = getMaxPercentageForSource(selectedValue);
+         const sliderPosition = (percentage / maxPercentage) * 100;
+         thumb.style.left = `${sliderPosition}%`;
+         fill.style.width = `${sliderPosition}%`;
                calculateImpact();
              }
          
              function getPercentageFromEvent(e, containerRect) {
-  	     const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-  	     const x = clientX - containerRect.left;
-  	     const sliderPosition = Math.max(0, Math.min(100, (x / containerRect.width) * 100));
-  
-  	     const selectedValue = dropdownToggle.dataset.value || 'military';
-  	     const maxPercentage = getMaxPercentageForSource(selectedValue);
-  
-  	     return (sliderPosition / 100) * maxPercentage;
-	     }
+         const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+         const x = clientX - containerRect.left;
+         const sliderPosition = Math.max(0, Math.min(100, (x / containerRect.width) * 100));
+         
+         const selectedValue = dropdownToggle.dataset.value || 'military';
+         const maxPercentage = getMaxPercentageForSource(selectedValue);
+         
+         return (sliderPosition / 100) * maxPercentage;
+         }
          
              function startDrag(e) {
                e.preventDefault();
@@ -1255,7 +1216,7 @@
              transferValue.innerHTML = selectedSource.value;
          if (selectedSource.conversionNote) {
          transferValue.innerHTML += '<br><span class="conversion-note">' + selectedSource.conversionNote + '</span>';
-	 }
+         }
          transferSource.textContent = selectedSource.source;
            }
          
@@ -1295,13 +1256,13 @@
          facebookShareBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
          linkedinShareBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
          }
-	 function resetSliderForNewSource() {
-	 currentPercentage = 0;
-	 thumb.style.left = '0%';
-	 fill.style.width = '0%';
-	 calculateImpact();
-	 }
-  
+         function resetSliderForNewSource() {
+         currentPercentage = 0;
+         thumb.style.left = '0%';
+         fill.style.width = '0%';
+         calculateImpact();
+         }
+         
            let scrollbarWidth = null;
          
            function getScrollbarWidth() {
