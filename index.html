@@ -509,9 +509,10 @@
          margin-bottom: 1.5rem;
          }
          .modal-title {
-         font-size: 1.125rem;
-         font-weight: 600;
+         font-size: var(--font-size-body);
+         font-weight: 400;
          color: var(--text-primary);
+	     text-transform: uppercase;
          font-family: 'JetBrains Mono', monospace;
          }
          .modal-close {
@@ -818,18 +819,8 @@
      .modal-content-small {
        width: 95%;
        padding: 1.5rem;
-	 }
-
-	 @media (hover: none) and (pointer: coarse) {
-    .dropdown-toggle,
-    .dropdown-menu li {
-        transition: none !important;
-
-        background-color: transparent !important;
-        -webkit-tap-highlight-color: transparent;
-        cursor: default;
-    }
-    }
+     }
+     }
      </style>
       <script type="application/ld+json">
          {
@@ -1408,6 +1399,7 @@
       </script>
    </body>
 </html>
+
 
 
 
