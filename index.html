@@ -781,6 +781,13 @@
          padding: 1.5rem;
          }
          }
+	 .custom-dropdown {
+    	 opacity: 0;
+    	 transition: opacity 0.1s ease;
+	 }
+	 .custom-dropdown.ready {
+    	 opacity: 1;
+	 }
       </style>
       <script type="application/ld+json">
          {
@@ -1358,7 +1365,7 @@ function updateSocialLinks() {
          calculateImpact();
 
 	 updateSocialLinks();
-
+         document.querySelector('.custom-dropdown').classList.add('ready');
          });
       </script>
    </body>
