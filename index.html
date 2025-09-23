@@ -821,15 +821,19 @@
 	 }
 
 	 @media (hover: none) and (pointer: coarse) {
-     .dropdown-toggle:hover {
-     background-color: transparent;
-     cursor: default;
-     }
+    .dropdown-toggle:hover,
+    .dropdown-toggle:active,
+    .dropdown-toggle:focus {
+        background-color: transparent;
+        cursor: default;
+    }
 
-     .dropdown-menu li:hover {
-     background-color: transparent;
-     }
-     }
+    .dropdown-menu li:hover,
+    .dropdown-menu li:active,
+    .dropdown-menu li:focus {
+        background-color: transparent;
+    }
+    }
      </style>
       <script type="application/ld+json">
          {
@@ -1408,6 +1412,7 @@
       </script>
    </body>
 </html>
+
 
 
 
