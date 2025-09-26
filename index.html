@@ -1225,9 +1225,6 @@
                 return maxPercentage;
             }
             let currentPercentage = 0;
-            if (window.location.search) {
-                window.history.replaceState({}, document.title, window.location.pathname);
-            }
             let isDragging = false;
 
             function setupNeuroSlider() {
