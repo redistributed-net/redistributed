@@ -1118,25 +1118,10 @@
             </div>
         </div>
     </div>
-    <div id="thankyou-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Thank you</h3>
-                <button class="modal-close icon-button">&times;</button>
-            </div>
-            <div class="modal-text">
-                <p>Thank you for your support. It doesn't go unnoticed.</p>
-            </div>
-        </div>
-    </div>
     <script>
         const transferPercentageDiv = document.getElementById('transfer-percentage');
         const reductionValueDiv = document.getElementById('reduction-value');
         document.addEventListener('DOMContentLoaded', () => {
-            if (window.location.search.includes('thankyou=true')) {
-                openModal(document.getElementById('thankyou-modal'));
-                window.history.replaceState({}, document.title, window.location.pathname);
-            }
             const slider = document.getElementById('neuro-slider');
             const dropdownOverlay = document.createElement('div');
             dropdownOverlay.className = 'dropdown-overlay';
