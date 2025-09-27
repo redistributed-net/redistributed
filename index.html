@@ -1334,7 +1334,7 @@
             }
             let scrollbarWidth = null;
 
-                        function getScrollbarWidth() {
+            function getScrollbarWidth() {
                 if (scrollbarWidth !== null) return scrollbarWidth;
                 scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
                 if (scrollbarWidth === 0) {
@@ -1415,12 +1415,6 @@
                     dropdownOverlay.classList.remove('active');
                 }
             });
-
-            if (window.location.search.includes('thankyou=true')) {
-                openModal(document.getElementById('thankyou-modal'));
-                window.history.replaceState({}, document.title, window.location.pathname);
-            }
-
             setupNeuroSlider();
             currentPercentage = 0;
             thumb.style.left = '0%';
