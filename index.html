@@ -6,22 +6,22 @@
     <title>redistributed | end starvation calculator</title>
     <meta name="description" content="An interactive calculator that shows how just a fraction — often less than 1% — of military expenditure, tax abuse, or luxury spending could end starvation.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://redistributed.net">
+    <link rel="canonical" href="[https://redistributed.net](https://redistributed.net)">
     <meta name="theme-color" content="#1a1a1a">
-    <meta property="og:url" content="https://redistributed.net">
+    <meta property="og:url" content="[https://redistributed.net](https://redistributed.net)">
     <meta property="og:type" content="website">
     <meta property="og:title" content="End starvation calculator">
     <meta property="og:description" content="We have the money to end starvation. We choose not to.">
     <meta property="og:site_name" content="redistributed">
-    <meta property="og:image" content="https://redistributed.net/end-starvation-calculator.jpg">
+    <meta property="og:image" content="[https://redistributed.net/end-starvation-calculator.jpg](https://redistributed.net/end-starvation-calculator.jpg)">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:domain" content="redistributed.net">
-    <meta name="twitter:url" content="https://redistributed.net">
+    <meta name="twitter:url" content="[https://redistributed.net](https://redistributed.net)">
     <meta name="twitter:title" content="End starvation calculator">
     <meta name="twitter:description" content="We have the money to end starvation. We choose not to.">
-    <meta name="twitter:image" content="https://redistributed.net/end-starvation-calculator.jpg">
+    <meta name="twitter:image" content="[https://redistributed.net/end-starvation-calculator.jpg](https://redistributed.net/end-starvation-calculator.jpg)">
     <meta property="og:locale" content="en_US">
     <meta name="author" content="redistributed">
     <link rel="preload" href="fonts/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -94,6 +94,8 @@
             --track-height: 6px;
             --font-size-support: 0.8rem;
             --font-size-tertiary: 0.8rem;
+            --neuro-duration: 0s;
+            --combine-duration: 0s;
         }
 
         * {
@@ -161,6 +163,11 @@
             text-transform: uppercase;
             text-align: center;
             margin-bottom: 2.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .controls-results {
@@ -324,6 +331,11 @@
             border-radius: 3px;
         }
 
+        .neuro-thumb,
+        .neuro-fill {
+            transition: left var(--neuro-duration, 0s) linear, width var(--neuro-duration, 0s) linear;
+        }
+
         .neuro-thumb {
             position: absolute;
             top: 50%;
@@ -405,6 +417,11 @@
             color: var(--text-primary);
             text-transform: uppercase;
             margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .social-links {
@@ -679,6 +696,100 @@
             z-index: 25;
         }
 
+        .combine-sliders-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .combine-slider-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .combine-slider-header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .combine-slider-label {
+            font-size: var(--font-size-support);
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .combine-slider-value {
+            font-size: var(--font-size-support);
+            font-weight: 700;
+            color: var(--text-primary);
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .combine-slider {
+            position: relative;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .combine-track {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: var(--track-height);
+            background: var(--surface);
+            border-radius: 3px;
+            transform: translateY(-50%);
+            box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+        }
+
+        .combine-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--fill-color);
+            width: 0%;
+            border-radius: 3px;
+        }
+
+        .combine-thumb,
+        .combine-fill {
+            transition: left var(--combine-duration, 0s) linear, width var(--combine-duration, 0s) linear;
+        }
+
+        .combine-thumb {
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            width: 16px;
+            height: 16px;
+            background: var(--surface);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            box-shadow: 2px 2px 4px var(--shadow-dark), -2px -2px 4px var(--shadow-light);
+            z-index: 2;
+        }
+
+        .combine-thumb::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: var(--fill-color);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -689,6 +800,14 @@
             .section-cta,
             .share-title {
                 font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+            }
+            .share-title {
+                margin-bottom: 1.5rem;
+                padding-bottom: 0.75rem;
+                border-bottom: 1px solid var(--border);
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
             }
             .section-cta {
                 margin-bottom: 2rem;
@@ -798,6 +917,19 @@
                 width: 92%;
                 max-width: 500px;
             }
+            .combine-sliders-container {
+                gap: 1.25rem;
+                margin-bottom: 2rem;
+            }
+            .combine-slider-item {
+                gap: 0.75rem;
+            }
+            .combine-slider-label,
+            .combine-slider-value {
+                font-size: clamp(10px, 2.2vw, 12px);
+                font-weight: 700;
+                color: var(--text-primary);
+            }
         }
 
         @media (max-width: 480px) {
@@ -843,49 +975,64 @@
                 width: 95%;
                 padding: 1.5rem;
             }
+            .combine-sliders-container {
+                gap: 1rem;
+            }
+            .combine-slider {
+                height: 14px;
+            }
+        }
+
+        a,
+        button,
+        .dropdown-toggle,
+        .dropdown-menu li,
+        .modal-close,
+        .info-icon {
+            transition: color 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
         }
     </style>
     <script type="application/ld+json">
         {
-            "@context": "https://schema.org",
+            "@context": "[https://schema.org](https://schema.org)",
             "@graph": [{
                     "@type": "WebSite",
                     "name": "redistributed | end starvation calculator",
-                    "url": "https://redistributed.net/",
+                    "url": "[https://redistributed.net/](https://redistributed.net/)",
                     "citation": [{
                             "@type": "CreativeWork",
                             "name": "FSIN (Food Security Information Network)",
-                            "url": "https://www.fsinplatform.org/"
+                            "url": "[https://www.fsinplatform.org/](https://www.fsinplatform.org/)"
                         },
                         {
                             "@type": "CreativeWork",
                             "name": "WFP (UN World Food Programme)",
-                            "url": "https://www.wfp.org/"
+                            "url": "[https://www.wfp.org/](https://www.wfp.org/)"
                         },
                         {
                             "@type": "CreativeWork",
                             "name": "FAO (Food and Agriculture Organization of the United Nations)",
-                            "url": "https://www.fao.org/"
+                            "url": "[https://www.fao.org/](https://www.fao.org/)"
                         },
                         {
                             "@type": "CreativeWork",
                             "name": "UNEP (UN Environment Programme)",
-                            "url": "https://www.unep.org/"
+                            "url": "[https://www.unep.org/](https://www.unep.org/)"
                         },
                         {
                             "@type": "CreativeWork",
                             "name": "OECD (The Organisation for Economic Co-operation and Development)",
-                            "url": "https://www.oecd.org/"
+                            "url": "[https://www.oecd.org/](https://www.oecd.org/)"
                         },
                         {
                             "@type": "CreativeWork",
                             "name": "SIPRI (Stockholm International Peace Research Institute)",
-                            "url": "https://www.sipri.org/"
+                            "url": "[https://www.sipri.org/](https://www.sipri.org/)"
                         },
                         {
                             "@type": "CreativeWork",
                             "name": "Tax Justice Network",
-                            "url": "https://taxjustice.net/"
+                            "url": "[https://taxjustice.net/](https://taxjustice.net/)"
                         }
                     ],
                     "mainEntity": {
@@ -899,7 +1046,7 @@
                     "applicationCategory": "UtilityApplication",
                     "operatingSystem": "Web Browser",
                     "description": "An interactive calculator that shows how just a fraction — often less than 1% — of military expenditure, tax abuse, or luxury spending could end starvation.",
-                    "url": "https://redistributed.net/",
+                    "url": "[https://redistributed.net/](https://redistributed.net/)",
                     "offers": {
                         "@type": "Offer",
                         "price": "0",
@@ -922,26 +1069,26 @@
                             "@type": "HowToStep",
                             "name": "Pick a source",
                             "text": "Choose between military expenditure, food loss and waste, tax abuse, fossil fuel support, overall luxury spending, or personal luxury spending.",
-                            "url": "https://redistributed.net/#step1"
+                            "url": "[https://redistributed.net/#step1](https://redistributed.net/#step1)"
                         },
                         {
                             "@type": "HowToStep",
                             "name": "Select a percentage to transfer",
                             "text": "Use the slider to choose a percentage of the total source funds to be redistributed.",
-                            "url": "https://redistributed.net/#step2"
+                            "url": "[https://redistributed.net/#step2](https://redistributed.net/#step2)"
                         },
                         {
                             "@type": "HowToStep",
                             "name": "Share your results",
                             "text": "See the calculated impact on global starvation, then share your finding to spread awareness.",
-                            "url": "https://redistributed.net/#step-results"
+                            "url": "[https://redistributed.net/#step-results](https://redistributed.net/#step-results)"
                         }
                     ]
                 }
             ]
         }
     </script>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="0545e3d7-5d8b-46aa-b0c9-1cebb3524151"></script>
+    <script defer src="[https://cloud.umami.is/script.js](https://cloud.umami.is/script.js)" data-website-id="0545e3d7-5d8b-46aa-b0c9-1cebb3524151"></script>
 </head>
 <body>
     <div class="container">
@@ -959,7 +1106,7 @@
                             <ul id="dropdown-menu" class="dropdown-menu">
                                 <li data-value="military">Military expenditure</li>
                                 <li data-value="foodwaste">Food loss and waste</li>
-                                <li data-value="taxevasion">Tax abuse</li>
+                                <li data-value="taxabuse">Tax abuse</li>
                                 <li data-value="fossilfuel">Fossil fuel support</li>
                                 <li data-value="overallluxury">Overall luxury spending</li>
                                 <li data-value="personalluxury">Personal luxury spending</li>
@@ -968,7 +1115,6 @@
                     </div>
                 </div>
                 <div class="slider-section">
-                    <label class="control-label">Percentage to transfer</label>
                     <div class="neuro-slider-container">
                         <div class="neuro-slider" id="neuro-slider">
                             <div class="neuro-track">
@@ -982,12 +1128,96 @@
                     <div class="result-item">
                         <div class="result-value" id="transfer-percentage">0.00%</div>
                         <div class="result-label">Resources transferred</div>
-                        <div class="info-icon icon-button" id="transfer-info">i</div>
+                        <div class="info-icon" id="transfer-info">i</div>
                     </div>
                     <div class="result-item">
                         <div class="result-value" id="reduction-value">0.00%</div>
                         <div class="result-label">Impact on starvation</div>
                         <div class="info-icon" id="reduction-info">i</div>
+                    </div>
+                </div>
+            </section>
+            <section class="controls-results">
+                <h2 class="section-cta">Combine sources, see the impact</h2>
+                <div class="combine-sliders-container">
+                    <div class="combine-slider-item">
+                        <div class="combine-slider-header">
+                            <span class="combine-slider-label">Military expenditure</span>
+                            <span class="combine-slider-value" id="combine-military-value">0.00%</span>
+                        </div>
+                        <div class="combine-slider" data-source="military">
+                            <div class="combine-track">
+                                <div class="combine-fill"></div>
+                            </div>
+                            <div class="combine-thumb"></div>
+                        </div>
+                    </div>
+                    <div class="combine-slider-item">
+                        <div class="combine-slider-header">
+                            <span class="combine-slider-label">Food loss and waste</span>
+                            <span class="combine-slider-value" id="combine-foodwaste-value">0.00%</span>
+                        </div>
+                        <div class="combine-slider" data-source="foodwaste">
+                            <div class="combine-track">
+                                <div class="combine-fill"></div>
+                            </div>
+                            <div class="combine-thumb"></div>
+                        </div>
+                    </div>
+                    <div class="combine-slider-item">
+                        <div class="combine-slider-header">
+                            <span class="combine-slider-label">Tax abuse</span>
+                            <span class="combine-slider-value" id="combine-taxabuse-value">0.00%</span>
+                        </div>
+                        <div class="combine-slider" data-source="taxabuse">
+                            <div class="combine-track">
+                                <div class="combine-fill"></div>
+                            </div>
+                            <div class="combine-thumb"></div>
+                        </div>
+                    </div>
+                    <div class="combine-slider-item">
+                        <div class="combine-slider-header">
+                            <span class="combine-slider-label">Fossil fuel support</span>
+                            <span class="combine-slider-value" id="combine-fossilfuel-value">0.00%</span>
+                        </div>
+                        <div class="combine-slider" data-source="fossilfuel">
+                            <div class="combine-track">
+                                <div class="combine-fill"></div>
+                            </div>
+                            <div class="combine-thumb"></div>
+                        </div>
+                    </div>
+                    <div class="combine-slider-item">
+                        <div class="combine-slider-header">
+                            <span class="combine-slider-label">Overall luxury spending</span>
+                            <span class="combine-slider-value" id="combine-overallluxury-value">0.00%</span>
+                        </div>
+                        <div class="combine-slider" data-source="overallluxury">
+                            <div class="combine-track">
+                                <div class="combine-fill"></div>
+                            </div>
+                            <div class="combine-thumb"></div>
+                        </div>
+                    </div>
+                    <div class="combine-slider-item">
+                        <div class="combine-slider-header">
+                            <span class="combine-slider-label">Personal luxury spending</span>
+                            <span class="combine-slider-value" id="combine-personalluxury-value">0.00%</span>
+                        </div>
+                        <div class="combine-slider" data-source="personalluxury">
+                            <div class="combine-track">
+                                <div class="combine-fill"></div>
+                            </div>
+                            <div class="combine-thumb"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="results-grid">
+                    <div class="result-item">
+                        <div class="result-value" id="combine-impact-value">0.00%</div>
+                        <div class="result-label">Impact on starvation</div>
+                        <div class="info-icon" id="combine-impact-info">i</div>
                     </div>
                 </div>
             </section>
@@ -1104,14 +1334,87 @@
                 <button class="modal-close icon-button">&times;</button>
             </div>
             <div class="modal-text">
-                <p>This is an advocacy project. Your <a href="https://buy.stripe.com/3cI5kF2SA2Rw03wcYf87K00" target="_blank" rel="noopener" style="color: var(--text-primary); text-decoration: none;">support</a> helps keep the tool running, update data,
-                    and expand its reach.</p>
+                <p>This is an advocacy project. Your <a href="[https://buy.stripe.com/3cI5kF2SA2Rw03wcYf87K00](https://buy.stripe.com/3cI5kF2SA2Rw03wcYf87K00)" target="_blank" rel="noopener" style="color: var(--text-primary); text-decoration: none;">support</a>                    helps keep the tool running, update data, and expand its reach.</p>
             </div>
         </div>
     </div>
     <script>
-        const transferPercentageDiv = document.getElementById('transfer-percentage');
-        const reductionValueDiv = document.getElementById('reduction-value');
+        const data = {
+            financialSources: {
+                military: {
+                    name: "Military expenditure",
+                    shareableName: "military expenditure",
+                    total: 2718000000000,
+                    includes: "Personnel, operations and maintenance, procurement, military research and development, military construction, military aid",
+                    value: "US$2.718 trillion",
+                    source: "SIPRI (Stockholm International Peace Research Institute)"
+                },
+                foodwaste: {
+                    name: "Food loss and waste",
+                    shareableName: "food waste",
+                    total: 1000000000000,
+                    includes: "Food loss along the food supply chain from harvest up to, but not including, the retail level<br>Food waste at the retail and consumption levels",
+                    value: "US$1.0 trillion",
+                    source: "FAO (Food and Agriculture Organization of the United Nations), UNEP (UN Environment Programme)"
+                },
+                taxabuse: {
+                    name: "Tax abuse",
+                    shareableName: "tax abuse",
+                    total: 492000000000,
+                    includes: "Multinational corporations and wealthy individuals using tax havens to underpay tax",
+                    value: "US$492 billion",
+                    source: "Tax Justice Network"
+                },
+                fossilfuel: {
+                    name: "Fossil fuel support",
+                    shareableName: "fossil fuel support",
+                    total: 513253000000,
+                    includes: "Budgetary transfers and tax expenditures that provide a benefit or preference for fossil-fuel production or consumption",
+                    value: "US$513.253 billion",
+                    source: "OECD (The Organisation for Economic Co-operation and Development)"
+                },
+                overallluxury: {
+                    name: "Overall luxury spending",
+                    shareableName: "luxury spending",
+                    total: 1602000000000,
+                    includes: "Luxury cars, personal luxury goods, luxury hospitality, fine wines and spirits, gourmet food and fine dining, high-end furniture and housewares, fine art, private jets and yachts, luxury cruises",
+                    value: "€1.48 trillion (US$1.602 trillion)",
+                    source: "Bain & Company, Fondazione Altagamma",
+                    conversionNote: "EUR values converted to USD using 2024 average exchange rate (1.0822)"
+                },
+                personalluxury: {
+                    name: "Personal luxury spending",
+                    shareableName: "personal luxury spending",
+                    total: 393000000000,
+                    includes: "Beauty, leather, apparel, watches, jewelry, shoes, other accessories (including eyewear)",
+                    value: "€363 billion (US$393 billion)",
+                    source: "Bain & Company, Fondazione Altagamma",
+                    conversionNote: "EUR values converted to USD using 2024 average exchange rate (1.0822)"
+                }
+            },
+            starvation: {
+                peopleInNeed: 37000000,
+                dailyCostPerPerson: 0.50
+            },
+            daysInYear: 365
+        };
+        const totalAnnualCost = data.starvation.peopleInNeed * data.starvation.dailyCostPerPerson * data.daysInYear;
+
+        function getMaxPercentageForSource(sourceKey) {
+            const source = data.financialSources[sourceKey];
+            const maxPercentage = (totalAnnualCost / source.total) * 100;
+            return maxPercentage;
+        }
+        let currentPercentage = 0;
+        let combineSources = {
+            military: 0,
+            foodwaste: 0,
+            taxabuse: 0,
+            fossilfuel: 0,
+            overallluxury: 0,
+            personalluxury: 0
+        };
+        let resetCombineSourcesFunc, resetPickSourceFunc;
         document.addEventListener('DOMContentLoaded', () => {
             const slider = document.getElementById('neuro-slider');
             const dropdownOverlay = document.createElement('div');
@@ -1124,6 +1427,8 @@
             const linkedinShareBtn = document.getElementById('linkedin-share');
             const dropdownToggle = document.getElementById('dropdown-toggle');
             const dropdownMenu = document.getElementById('dropdown-menu');
+            const transferPercentageDiv = document.getElementById('transfer-percentage');
+            const reductionValueDiv = document.getElementById('reduction-value');
             const modals = {
                 transfer: document.getElementById('transfer-modal'),
                 reduction: document.getElementById('reduction-modal'),
@@ -1134,76 +1439,6 @@
             const transferIncludes = document.getElementById('transfer-includes');
             const transferValue = document.getElementById('transfer-value');
             const transferSource = document.getElementById('transfer-source');
-            const data = {
-                financialSources: {
-                    military: {
-                        name: "Military expenditure",
-                        shareableName: "military spending",
-                        total: 2718000000000,
-                        includes: "Personnel, operations and maintenance, procurement, military research and development, military construction, military aid",
-                        value: "US$2.718 trillion",
-                        source: "SIPRI (Stockholm International Peace Research Institute)"
-                    },
-                    foodwaste: {
-                        name: "Food loss and waste",
-                        shareableName: "food waste",
-                        total: 1000000000000,
-                        includes: "Food loss along the food supply chain from harvest up to, but not including, the retail level<br>Food waste at the retail and consumption levels",
-                        value: "US$1.0 trillion",
-                        source: "FAO (Food and Agriculture Organization of the United Nations), UNEP (UN Environment Programme)"
-                    },
-                    taxevasion: {
-                        name: "Tax abuse",
-                        shareableName: "tax abuse",
-                        total: 492000000000,
-                        includes: "Multinational corporations and wealthy individuals using tax havens to underpay tax",
-                        value: "US$492 billion",
-                        source: "Tax Justice Network"
-                    },
-                    fossilfuel: {
-                        name: "Fossil fuel support",
-                        shareableName: "fossil fuel support",
-                        total: 513253000000,
-                        includes: "Budgetary transfers and tax expenditures that provide a benefit or preference for fossil-fuel production or consumption",
-                        value: "US$513.253 billion",
-                        source: "OECD (The Organisation for Economic Co-operation and Development)"
-                    },
-                    overallluxury: {
-                        name: "Overall luxury spending",
-                        shareableName: "luxury spending",
-                        total: 1602000000000,
-                        includes: "Luxury cars, personal luxury goods, luxury hospitality, fine wines and spirits, gourmet food and fine dining, high-end furniture and housewares, fine art, private jets and yachts, luxury cruises",
-                        value: "€1.48 trillion (US$1.602 trillion)",
-                        source: "Bain & Company, Fondazione Altagamma",
-                        conversionNote: "EUR values converted to USD using 2024 average exchange rate (1.0822)"
-                    },
-                    personalluxury: {
-                        name: "Personal luxury spending",
-                        shareableName: "personal luxury spending",
-                        total: 393000000000,
-                        includes: "Beauty, leather, apparel, watches, jewelry, shoes, other accessories (including eyewear)",
-                        value: "€363 billion (US$393 billion)",
-                        source: "Bain & Company, Fondazione Altagamma",
-                        conversionNote: "EUR values converted to USD using 2024 average exchange rate (1.0822)"
-                    }
-                },
-                acuteHunger: {
-                    peopleInNeed: 37000000,
-                    dailyCostPerPerson: 0.50
-                },
-                daysInYear: 365
-            };
-
-            function getMaxPercentageForSource(sourceKey) {
-                const source = data.financialSources[sourceKey];
-                const totalAnnualCost = data.acuteHunger.peopleInNeed * data.acuteHunger.dailyCostPerPerson * data.daysInYear;
-                const maxPercentage = (totalAnnualCost / source.total) * 100;
-                return maxPercentage;
-            }
-            let currentPercentage = 0;
-            if (window.location.search) {
-                window.history.replaceState({}, document.title, window.location.pathname);
-            }
             let isDragging = false;
 
             function setupNeuroSlider() {
@@ -1211,10 +1446,15 @@
                     currentPercentage = percentage;
                     const selectedValue = dropdownToggle.dataset.value || 'military';
                     const maxPercentage = getMaxPercentageForSource(selectedValue);
+                    slider.style.setProperty('--neuro-duration', '0s');
                     const sliderPosition = (percentage / maxPercentage) * 100;
                     thumb.style.left = `${sliderPosition}%`;
                     fill.style.width = `${sliderPosition}%`;
                     calculateImpact();
+                    if (percentage > 0 && resetCombineSourcesFunc) {
+                        resetCombineSourcesFunc();
+                    }
+                    updateSocialLinks();
                 }
 
                 function getPercentageFromEvent(e, containerRect) {
@@ -1276,7 +1516,6 @@
                     return;
                 }
                 const redistributedAmount = selectedSource.total * (actualPercentage / 100);
-                const totalAnnualCost = data.acuteHunger.peopleInNeed * data.acuteHunger.dailyCostPerPerson * data.daysInYear;
                 let reductionPercentage = (redistributedAmount / totalAnnualCost) * 100;
                 let displayPercentage = Math.min(100, reductionPercentage);
                 if (displayPercentage >= 99.99) {
@@ -1284,30 +1523,67 @@
                 } else {
                     reductionValueDiv.textContent = displayPercentage >= 10 ? displayPercentage.toFixed(1) + '%' : displayPercentage.toFixed(2) + '%';
                 }
-                updateSocialLinks();
             }
 
             function updateSocialLinks() {
+                const activeSection = Object.values(combineSources).some(percentage => percentage > 0) ? 'combine' : 'single';
+                const baseUrl = '[https://redistributed.net](https://redistributed.net)';
                 const selectedValue = dropdownToggle.dataset.value || 'military';
                 const selectedSource = data.financialSources[selectedValue];
-                const actualPercentage = currentPercentage;
-                const reduction = reductionValueDiv.textContent;
-                const baseUrl = 'https://redistributed.net';
-                // Twitter
-                const twitterText = `Just ${actualPercentage.toFixed(2)}% of ${selectedSource.shareableName} could reduce starvation by ${reduction}. Pick a source, see the impact:`;
-                twitterShareBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(baseUrl)}`;
-                // Facebook
+                if (activeSection === 'single') {
+                    const twitterText = `Just ${currentPercentage.toFixed(2)}% of ${selectedSource.shareableName} could reduce starvation by ${reductionValueDiv.textContent}. Pick a source, see the impact:`;
+                    twitterShareBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(baseUrl)}`;
+                } else {
+                    const twitterText = `Just a fraction of existing resources could end starvation. Combine sources, see the impact:`;
+                    twitterShareBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(baseUrl)}`;
+                }
                 facebookShareBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(baseUrl)}`;
-                // LinkedIn
                 linkedinShareBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(baseUrl)}`;
             }
 
             function resetSliderForNewSource() {
+                const MAX_TIME = 0.8;
+                if (currentPercentage > 0) {
+                    slider.style.setProperty('--neuro-duration', MAX_TIME + 's');
+                    setTimeout(() => {
+                        slider.style.setProperty('--neuro-duration', '0s');
+                    }, MAX_TIME * 1000 + 50);
+                } else {
+                    slider.style.setProperty('--neuro-duration', '0s');
+                }
                 currentPercentage = 0;
                 thumb.style.left = '0%';
                 fill.style.width = '0%';
                 calculateImpact();
+                updateSocialLinks();
             }
+            document.getElementById('transfer-info').addEventListener('click', () => openModal(modals.transfer));
+            document.getElementById('reduction-info').addEventListener('click', () => openModal(modals.reduction));
+            document.getElementById('combine-impact-info').addEventListener('click', () => openModal(modals.reduction));
+            document.getElementById('about-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(modals.about);
+            });
+            document.getElementById('support-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(modals.support);
+            });
+            dropdownToggle.addEventListener('click', () => {
+                dropdownMenu.classList.toggle('open');
+                dropdownToggle.classList.toggle('open');
+                dropdownOverlay.classList.toggle('active');
+            });
+            dropdownMenu.addEventListener('click', (e) => {
+                if (e.target.tagName === 'LI') {
+                    const selectedValue = e.target.dataset.value;
+                    dropdownToggle.textContent = e.target.textContent;
+                    dropdownToggle.dataset.value = selectedValue;
+                    dropdownMenu.classList.remove('open');
+                    dropdownToggle.classList.remove('open');
+                    dropdownOverlay.classList.remove('active');
+                    resetSliderForNewSource();
+                }
+            });
             let scrollbarWidth = null;
 
             function getScrollbarWidth() {
@@ -1340,16 +1616,6 @@
                 document.body.style.overflow = 'auto';
                 modal.style.display = 'none';
             }
-            document.getElementById('transfer-info').addEventListener('click', () => openModal(modals.transfer));
-            document.getElementById('reduction-info').addEventListener('click', () => openModal(modals.reduction));
-            document.getElementById('about-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                openModal(modals.about);
-            });
-            document.getElementById('support-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                openModal(modals.support);
-            });
             document.querySelectorAll('.modal-close').forEach(closeBtn => {
                 closeBtn.addEventListener('click', (e) => {
                     closeModal(e.target.closest('.modal-overlay'));
@@ -1367,23 +1633,6 @@
                     });
                 }
             });
-            dropdownToggle.addEventListener('click', () => {
-                dropdownMenu.classList.toggle('open');
-                dropdownToggle.classList.toggle('open');
-                dropdownOverlay.classList.toggle('active');
-            });
-            dropdownMenu.addEventListener('click', (e) => {
-                if (e.target.tagName === 'LI') {
-                    const selectedValue = e.target.dataset.value;
-                    dropdownToggle.textContent = e.target.textContent;
-                    dropdownToggle.dataset.value = selectedValue;
-                    dropdownMenu.classList.remove('open');
-                    dropdownToggle.classList.remove('open');
-                    dropdownOverlay.classList.remove('active');
-                    resetSliderForNewSource();
-                    updateSocialLinks();
-                }
-            });
             document.addEventListener('click', (e) => {
                 if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
                     dropdownMenu.classList.remove('open');
@@ -1397,9 +1646,140 @@
             fill.style.width = '0%';
             calculateImpact();
             updateSocialLinks();
+            const combineImpactValue = document.getElementById('combine-impact-value');
+
+            function getSourceImpact(key, percentage) {
+                const sourceTotal = data.financialSources[key].total;
+                const redistributedAmount = sourceTotal * (percentage / 100);
+                return (redistributedAmount / totalAnnualCost) * 100;
+            }
+
+            function updateCombineDisplay() {
+                let totalImpact = 0;
+                for (const [key, percentage] of Object.entries(combineSources)) {
+                    totalImpact += getSourceImpact(key, percentage);
+                }
+                const displayImpact = Math.min(100, totalImpact);
+                combineImpactValue.textContent = displayImpact >= 99.99 ? '100%' :
+                    (displayImpact >= 10 ? displayImpact.toFixed(1) + '%' : displayImpact.toFixed(2) + '%');
+            }
+
+            function resetCombine() {
+                const MAX_TIME = 0.8;
+                let needsAnimation = false;
+                for (const key in combineSources) {
+                    if (combineSources[key] > 0) {
+                        needsAnimation = true;
+                        break;
+                    }
+                }
+                for (const key in combineSources) {
+                    const container = document.querySelector(`.combine-slider[data-source="${key}"]`);
+                    const thumb = container.querySelector('.combine-thumb');
+                    const fill = container.querySelector('.combine-fill');
+                    const valueDisplay = document.getElementById(`combine-${key}-value`);
+                    const durationString = (combineSources[key] > 0 && needsAnimation) ? MAX_TIME + 's' : '0s';
+                    container.style.setProperty('--combine-duration', durationString);
+                    combineSources[key] = 0;
+                    thumb.style.left = '0%';
+                    fill.style.width = '0%';
+                    valueDisplay.textContent = '0.00%';
+                }
+                if (needsAnimation) {
+                    setTimeout(() => {
+                        for (const key in combineSources) {
+                            const container = document.querySelector(`.combine-slider[data-source="${key}"]`);
+                            container.style.setProperty('--combine-duration', '0s');
+                        }
+                    }, MAX_TIME * 1000 + 50);
+                }
+                updateCombineDisplay();
+                updateSocialLinks();
+            }
+
+            function getTotalImpact() {
+                let total = 0;
+                for (const [sourceKey, percentage] of Object.entries(combineSources)) {
+                    total += getSourceImpact(sourceKey, percentage);
+                }
+                return total;
+            }
+
+            function setupCombineSlider(key) {
+                const container = document.querySelector(`.combine-slider[data-source="${key}"]`);
+                const thumb = container.querySelector('.combine-thumb');
+                const fill = container.querySelector('.combine-fill');
+                const valueDisplay = document.getElementById(`combine-${key}-value`);
+                let isDragging = false;
+
+                function updateSliderPosition(percentage) {
+                    container.style.setProperty('--combine-duration', '0s');
+                    const currentTotalImpact = getTotalImpact();
+                    const currentSourceImpact = getSourceImpact(key, combineSources[key]);
+                    const newSourceImpact = getSourceImpact(key, percentage);
+                    const potentialTotalImpact = currentTotalImpact - currentSourceImpact + newSourceImpact;
+                    if (potentialTotalImpact > 100) {
+                        const maxAllowedImpact = 100 - (currentTotalImpact - currentSourceImpact);
+                        if (maxAllowedImpact <= 0) {
+                            return;
+                        }
+                        const sourceTotal = data.financialSources[key].total;
+                        const maxAllowedPercentage = (maxAllowedImpact * totalAnnualCost) / sourceTotal;
+                        percentage = Math.min(percentage, maxAllowedPercentage);
+                    }
+                    const maxPercentage = getMaxPercentageForSource(key);
+                    const adjustedPercentage = Math.max(0, Math.min(percentage, maxPercentage));
+                    combineSources[key] = adjustedPercentage;
+                    const sliderPosition = (adjustedPercentage / maxPercentage) * 100;
+                    thumb.style.left = `${sliderPosition}%`;
+                    fill.style.width = `${sliderPosition}%`;
+                    valueDisplay.textContent = adjustedPercentage >= 10 ?
+                        adjustedPercentage.toFixed(1) + '%' : adjustedPercentage.toFixed(2) + '%';
+                    updateCombineDisplay();
+                    if (adjustedPercentage > 0 && resetPickSourceFunc) {
+                        resetPickSourceFunc();
+                    }
+                    updateSocialLinks();
+                }
+
+                function getPercentageFromEvent(e) {
+                    const rect = container.getBoundingClientRect();
+                    const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                    const x = clientX - rect.left;
+                    const sliderPosition = Math.max(0, Math.min(100, (x / rect.width) * 100));
+                    const maxPercentage = getMaxPercentageForSource(key);
+                    return (sliderPosition / 100) * maxPercentage;
+                }
+
+                function startDrag(e) {
+                    const currentTotalImpact = getTotalImpact();
+                    if (currentTotalImpact >= 100 && combineSources[key] === 0) {}
+                    e.preventDefault();
+                    isDragging = true;
+                    updateSliderPosition(getPercentageFromEvent(e));
+                }
+
+                function drag(e) {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                    updateSliderPosition(getPercentageFromEvent(e));
+                }
+
+                function endDrag() {
+                    isDragging = false;
+                }
+                container.addEventListener('mousedown', startDrag);
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('mouseup', endDrag);
+                container.addEventListener('touchstart', startDrag);
+                document.addEventListener('touchmove', drag);
+                document.addEventListener('touchend', endDrag);
+            }
+            Object.keys(combineSources).forEach(setupCombineSlider);
+            resetCombineSourcesFunc = resetCombine;
+            resetPickSourceFunc = resetSliderForNewSource;
+            updateCombineDisplay();
         });
     </script>
 </body>
 </html>
-
-
