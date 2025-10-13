@@ -1030,11 +1030,11 @@
                             "Advocacy"
                         ],
                         "areaServed": "Worldwide",
-			    "sameAs": [
-    			    "https://x.com/_redistributed_",
-    			    "https://bsky.app/profile/redistributed.bsky.social",
-    			    "https://www.facebook.com/redistributed.net"
-			]
+                        "sameAs": [
+                            "https://x.com/_redistributed_",
+                            "https://bsky.app/profile/redistributed.bsky.social",
+                            "https://www.facebook.com/redistributed.net"
+                        ]
                     }
                 },
                 {
@@ -1470,6 +1470,25 @@
         };
         const totalAnnualCost = data.starvation.peopleInNeed * data.starvation.dailyCostPerPerson * data.daysInYear;
 
+        function animateNumber(element, startValue, endValue, duration, formatter) {
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // Easing function for smooth deceleration
+                const easeOutQuad = progress * (2 - progress);
+                const currentValue = startValue + (endValue - startValue) * easeOutQuad;
+                element.textContent = formatter(currentValue);
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    element.textContent = formatter(endValue);
+                }
+            }
+            requestAnimationFrame(update);
+        }
+
         function getMaxPercentageForSource(sourceKey) {
             const source = data.financialSources[sourceKey];
             const maxPercentage = (totalAnnualCost / source.total) * 100;
@@ -1601,16 +1620,16 @@
                 const selectedValue = dropdownToggle.dataset.value || 'military';
                 const selectedSource = data.financialSources[selectedValue];
                 if (activeSection === 'single') {
-                    const twitterText = `Just ${currentPercentage.toFixed(2)}% of ${selectedSource.shareableName} could reduce starvation by ${reductionValueDiv.textContent}. Pick a source, see the impact:`;
+                    const twitterText = `Just ${currentPercentage.toFixed(2)}% of ${selectedSource.shareableName} could reduce starvation by ${reductionValueDiv.textContent}. Run your own numbers:`;
                     twitterShareBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(baseUrl)}`;
                 } else {
-                    const twitterText = `Just a fraction of existing resources could end starvation. Combine sources, see the impact:`;
+                    const twitterText = `Just a fraction of existing resources could end starvation. Run your own numbers:`;
                     twitterShareBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(baseUrl)}`;
                 }
                 facebookShareBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(baseUrl)}`;
                 const blueskyText = activeSection === 'single' ?
-                    `Just ${currentPercentage.toFixed(2)}% of ${selectedSource.shareableName} could reduce starvation by ${reductionValueDiv.textContent}. Pick a source, see the impact:` :
-                    `Just a fraction of existing resources could end starvation. Combine sources, see the impact:`;
+                    `Just ${currentPercentage.toFixed(2)}% of ${selectedSource.shareableName} could reduce starvation by ${reductionValueDiv.textContent}. Run your own numbers:` :
+                    `Just a fraction of existing resources could end starvation. Run your own numbers:`;
                 blueskyShareBtn.href = `https://bsky.app/intent/compose?text=${encodeURIComponent(blueskyText + ' ' + baseUrl)}`;
             }
 
@@ -1618,16 +1637,41 @@
                 const MAX_TIME = 0.8;
                 if (currentPercentage > 0) {
                     slider.style.setProperty('--neuro-duration', MAX_TIME + 's');
+                    // Animate the percentage number
+                    const startPercentage = currentPercentage;
+                    animateNumber(
+                        transferPercentageDiv,
+                        startPercentage,
+                        0,
+                        MAX_TIME * 1000,
+                        (val) => val >= 10 ? val.toFixed(1) + '%' : val.toFixed(2) + '%'
+                    );
+                    // Animate the reduction value
+                    const selectedValue = dropdownToggle.dataset.value || 'military';
+                    const selectedSource = data.financialSources[selectedValue];
+                    const redistributedAmount = selectedSource.total * (startPercentage / 100);
+                    const startReduction = Math.min(100, (redistributedAmount / totalAnnualCost) * 100);
+                    animateNumber(
+                        reductionValueDiv,
+                        startReduction,
+                        0,
+                        MAX_TIME * 1000,
+                        (val) => {
+                            if (val >= 99.99) return '100%';
+                            return val >= 10 ? val.toFixed(1) + '%' : val.toFixed(2) + '%';
+                        }
+                    );
                     setTimeout(() => {
                         slider.style.setProperty('--neuro-duration', '0s');
                     }, MAX_TIME * 1000 + 50);
                 } else {
                     slider.style.setProperty('--neuro-duration', '0s');
+                    transferPercentageDiv.textContent = '0.00%';
+                    reductionValueDiv.textContent = '0.00%';
                 }
                 currentPercentage = 0;
                 thumb.style.left = '0%';
                 fill.style.width = '0%';
-                calculateImpact();
                 updateSocialLinks();
             }
             document.getElementById('transfer-info').addEventListener('click', () => openModal(modals.transfer));
@@ -1746,6 +1790,23 @@
                         break;
                     }
                 }
+                // Animate the combine impact value
+                if (needsAnimation) {
+                    const startImpact = getTotalImpact();
+                    animateNumber(
+                        combineImpactValue,
+                        startImpact,
+                        0,
+                        MAX_TIME * 1000,
+                        (val) => {
+                            const displayImpact = Math.min(100, val);
+                            if (displayImpact >= 99.99) return '100%';
+                            return displayImpact >= 10 ? displayImpact.toFixed(1) + '%' : displayImpact.toFixed(2) + '%';
+                        }
+                    );
+                } else {
+                    combineImpactValue.textContent = '0.00%';
+                }
                 for (const key in combineSources) {
                     const container = document.querySelector(`.combine-slider[data-source="${key}"]`);
                     const thumb = container.querySelector('.combine-thumb');
@@ -1753,10 +1814,22 @@
                     const valueDisplay = document.getElementById(`combine-${key}-value`);
                     const durationString = (combineSources[key] > 0 && needsAnimation) ? MAX_TIME + 's' : '0s';
                     container.style.setProperty('--combine-duration', durationString);
+                    // Animate individual slider values
+                    if (combineSources[key] > 0 && needsAnimation) {
+                        const startValue = combineSources[key];
+                        animateNumber(
+                            valueDisplay,
+                            startValue,
+                            0,
+                            MAX_TIME * 1000,
+                            (val) => val >= 10 ? val.toFixed(1) + '%' : val.toFixed(2) + '%'
+                        );
+                    } else {
+                        valueDisplay.textContent = '0.00%';
+                    }
                     combineSources[key] = 0;
                     thumb.style.left = '0%';
                     fill.style.width = '0%';
-                    valueDisplay.textContent = '0.00%';
                 }
                 if (needsAnimation) {
                     setTimeout(() => {
@@ -1766,7 +1839,6 @@
                         }
                     }, MAX_TIME * 1000 + 50);
                 }
-                updateCombineDisplay();
                 updateSocialLinks();
             }
 
