@@ -1672,6 +1672,7 @@
                 currentPercentage = 0;
                 thumb.style.left = '0%';
                 fill.style.width = '0%';
+		updateTransferModal();
                 updateSocialLinks();
             }
             document.getElementById('transfer-info').addEventListener('click', () => openModal(modals.transfer));
@@ -1685,23 +1686,23 @@
                 e.preventDefault();
                 openModal(modals.support);
             });
-            dropdownToggle.addEventListener('click', () => {
-                dropdownMenu.classList.toggle('open');
-                dropdownToggle.classList.toggle('open');
-                dropdownOverlay.classList.toggle('active');
-            });
-            dropdownMenu.addEventListener('click', (e) => {
-                if (e.target.tagName === 'LI') {
-                    const selectedValue = e.target.dataset.value;
-                    dropdownToggle.textContent = e.target.textContent;
-                    dropdownToggle.dataset.value = selectedValue;
-                    dropdownMenu.classList.remove('open');
-                    dropdownToggle.classList.remove('open');
-                    dropdownOverlay.classList.remove('active');
-                    resetSliderForNewSource();
-                }
-            });
-            let scrollbarWidth = null;
+dropdownToggle.addEventListener('click', () => {
+    dropdownMenu.classList.toggle('open');
+    dropdownToggle.classList.toggle('open');
+    dropdownOverlay.classList.toggle('active');
+});
+dropdownMenu.addEventListener('click', (e) => {
+    if (e.target.tagName === 'LI') {
+        const selectedValue = e.target.dataset.value;
+        dropdownToggle.textContent = e.target.textContent;
+        dropdownToggle.dataset.value = selectedValue;
+        dropdownMenu.classList.remove('open');
+        dropdownToggle.classList.remove('open');
+        dropdownOverlay.classList.remove('active');
+        resetSliderForNewSource();
+    }
+});
+let scrollbarWidth = null;
 
             function getScrollbarWidth() {
                 if (scrollbarWidth !== null) return scrollbarWidth;
