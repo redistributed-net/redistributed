@@ -1270,18 +1270,6 @@
                             <div class="combine-thumb"></div>
                         </div>
                     </div>
-                    <div class="combine-slider-item">
-                        <div class="combine-slider-header">
-                            <span class="combine-slider-label">Personal luxury spending</span>
-                            <span class="combine-slider-value" id="combine-personalluxury-value">0.00%</span>
-                        </div>
-                        <div class="combine-slider" data-source="personalluxury">
-                            <div class="combine-track">
-                                <div class="combine-fill"></div>
-                            </div>
-                            <div class="combine-thumb"></div>
-                        </div>
-                    </div>
                 </div>
                 <div class="results-grid">
                     <div class="result-item">
@@ -1456,7 +1444,7 @@
                     name: "Personal luxury spending",
                     shareableName: "personal luxury spending",
                     total: 393000000000,
-                    includes: "Beauty, leather, apparel, watches, jewelry, shoes, other accessories (including eyewear)",
+                    includes: "Subset of overall luxury spending: beauty, leather, apparel, watches, jewelry, shoes, other accessories (including eyewear)",
                     value: "€363 billion (US$393 billion)",
                     source: "Bain & Company, Fondazione Altagamma",
                     conversionNote: "EUR values converted to USD using 2024 average exchange rate (1.0822)"
@@ -1501,7 +1489,6 @@
             taxabuse: 0,
             fossilfuel: 0,
             overallluxury: 0,
-            personalluxury: 0
         };
         let resetCombineSourcesFunc, resetPickSourceFunc;
         document.addEventListener('DOMContentLoaded', () => {
@@ -1574,10 +1561,10 @@
                 function endDrag() {
                     isDragging = false;
                 }
-                slider.addEventListener('mousedown', startDrag);
+                thumb.addEventListener('mousedown', startDrag);
                 document.addEventListener('mousemove', drag);
                 document.addEventListener('mouseup', endDrag);
-                slider.addEventListener('touchstart', startDrag);
+                thumb.addEventListener('touchstart', startDrag);
                 document.addEventListener('touchmove', drag);
                 document.addEventListener('touchend', endDrag);
             }
@@ -1634,7 +1621,7 @@
             }
 
             function resetSliderForNewSource() {
-                const MAX_TIME = 0.8;
+		const MAX_TIME = 0.8;  // ← ADICIONAR AQUI
                 if (currentPercentage > 0) {
                     slider.style.setProperty('--neuro-duration', MAX_TIME + 's');
                     // Animate the percentage number
@@ -1783,7 +1770,7 @@ let scrollbarWidth = null;
             }
 
             function resetCombine() {
-                const MAX_TIME = 0.8;
+		const MAX_TIME = 0.8;  // ← ADICIONAR AQUI
                 let needsAnimation = false;
                 for (const key in combineSources) {
                     if (combineSources[key] > 0) {
@@ -1914,10 +1901,10 @@ let scrollbarWidth = null;
                 function endDrag() {
                     isDragging = false;
                 }
-                container.addEventListener('mousedown', startDrag);
+                thumb.addEventListener('mousedown', startDrag);
                 document.addEventListener('mousemove', drag);
                 document.addEventListener('mouseup', endDrag);
-                container.addEventListener('touchstart', startDrag);
+                thumb.addEventListener('touchstart', startDrag);
                 document.addEventListener('touchmove', drag);
                 container.addEventListener('touchend', endDrag);
             }
