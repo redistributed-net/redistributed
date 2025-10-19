@@ -1482,6 +1482,24 @@
             const maxPercentage = (totalAnnualCost / source.total) * 100;
             return maxPercentage;
         }
+        // Helper function for consistent percentage formatting
+        const DISPLAY_AS_100_THRESHOLD = 99.99;
+        const DECIMAL_PRECISION_THRESHOLD = 10;
+
+        function formatPercentage(value, options = {}) {
+            const {
+                checkMax = false
+            } = options;
+            // UI polish: display 100% when very close
+            if (checkMax && value >= DISPLAY_AS_100_THRESHOLD) {
+                return '100%';
+            }
+            // Standard formatting: 1 decimal for >=10%, 2 decimals for <10%
+            if (value >= DECIMAL_PRECISION_THRESHOLD) {
+                return value.toFixed(1) + '%';
+            }
+            return value.toFixed(2) + '%';
+        }
         let currentPercentage = 0;
         let combineSources = {
             military: 0,
@@ -1585,7 +1603,7 @@
                 const selectedValue = dropdownToggle.dataset.value || 'military';
                 const selectedSource = data.financialSources[selectedValue];
                 const actualPercentage = currentPercentage;
-                transferPercentageDiv.textContent = actualPercentage >= 10 ? actualPercentage.toFixed(1) + '%' : actualPercentage.toFixed(2) + '%';
+                transferPercentageDiv.textContent = formatPercentage(actualPercentage);
                 updateTransferModal();
                 if (actualPercentage === 0) {
                     reductionValueDiv.textContent = '0.00%';
@@ -1594,11 +1612,9 @@
                 const redistributedAmount = selectedSource.total * (actualPercentage / 100);
                 let reductionPercentage = (redistributedAmount / totalAnnualCost) * 100;
                 let displayPercentage = Math.min(100, reductionPercentage);
-                if (displayPercentage >= 99.99) {
-                    reductionValueDiv.textContent = '100%';
-                } else {
-                    reductionValueDiv.textContent = displayPercentage >= 10 ? displayPercentage.toFixed(1) + '%' : displayPercentage.toFixed(2) + '%';
-                }
+                reductionValueDiv.textContent = formatPercentage(displayPercentage, {
+                    checkMax: true
+                });
             }
 
             function updateSocialLinks() {
@@ -1607,7 +1623,7 @@
                 const selectedValue = dropdownToggle.dataset.value || 'military';
                 const selectedSource = data.financialSources[selectedValue];
                 if (activeSection === 'single') {
-                    const twitterText = `Just ${currentPercentage.toFixed(2)}% of ${selectedSource.shareableName} could reduce starvation by ${reductionValueDiv.textContent}. Run your own numbers:`;
+                    const twitterText = `Just ${formatPercentage(currentPercentage)} of ${selectedSource.shareableName} could reduce starvation by ${reductionValueDiv.textContent}. Run your own numbers:`;
                     twitterShareBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(baseUrl)}`;
                 } else {
                     const twitterText = `Just a fraction of existing resources could end starvation. Run your own numbers:`;
@@ -1615,13 +1631,13 @@
                 }
                 facebookShareBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(baseUrl)}`;
                 const blueskyText = activeSection === 'single' ?
-                    `Just ${currentPercentage.toFixed(2)}% of ${selectedSource.shareableName} could reduce starvation by ${reductionValueDiv.textContent}. Run your own numbers:` :
+                    `Just ${formatPercentage(currentPercentage)} of ${selectedSource.shareableName} could reduce starvation by ${reductionValueDiv.textContent}. Run your own numbers:` :
                     `Just a fraction of existing resources could end starvation. Run your own numbers:`;
                 blueskyShareBtn.href = `https://bsky.app/intent/compose?text=${encodeURIComponent(blueskyText + ' ' + baseUrl)}`;
             }
 
             function resetSliderForNewSource() {
-		const MAX_TIME = 0.8;  // ← ADICIONAR AQUI
+                const MAX_TIME = 0.8; // ← ADICIONAR AQUI
                 if (currentPercentage > 0) {
                     slider.style.setProperty('--neuro-duration', MAX_TIME + 's');
                     // Animate the percentage number
@@ -1631,7 +1647,7 @@
                         startPercentage,
                         0,
                         MAX_TIME * 1000,
-                        (val) => val >= 10 ? val.toFixed(1) + '%' : val.toFixed(2) + '%'
+                        (val) => formatPercentage(val)
                     );
                     // Animate the reduction value
                     const selectedValue = dropdownToggle.dataset.value || 'military';
@@ -1643,10 +1659,9 @@
                         startReduction,
                         0,
                         MAX_TIME * 1000,
-                        (val) => {
-                            if (val >= 99.99) return '100%';
-                            return val >= 10 ? val.toFixed(1) + '%' : val.toFixed(2) + '%';
-                        }
+                        (val) => formatPercentage(val, {
+                            checkMax: true
+                        })
                     );
                     setTimeout(() => {
                         slider.style.setProperty('--neuro-duration', '0s');
@@ -1659,7 +1674,7 @@
                 currentPercentage = 0;
                 thumb.style.left = '0%';
                 fill.style.width = '0%';
-		updateTransferModal();
+                updateTransferModal();
                 updateSocialLinks();
             }
             document.getElementById('transfer-info').addEventListener('click', () => openModal(modals.transfer));
@@ -1673,23 +1688,23 @@
                 e.preventDefault();
                 openModal(modals.support);
             });
-dropdownToggle.addEventListener('click', () => {
-    dropdownMenu.classList.toggle('open');
-    dropdownToggle.classList.toggle('open');
-    dropdownOverlay.classList.toggle('active');
-});
-dropdownMenu.addEventListener('click', (e) => {
-    if (e.target.tagName === 'LI') {
-        const selectedValue = e.target.dataset.value;
-        dropdownToggle.textContent = e.target.textContent;
-        dropdownToggle.dataset.value = selectedValue;
-        dropdownMenu.classList.remove('open');
-        dropdownToggle.classList.remove('open');
-        dropdownOverlay.classList.remove('active');
-        resetSliderForNewSource();
-    }
-});
-let scrollbarWidth = null;
+            dropdownToggle.addEventListener('click', () => {
+                dropdownMenu.classList.toggle('open');
+                dropdownToggle.classList.toggle('open');
+                dropdownOverlay.classList.toggle('active');
+            });
+            dropdownMenu.addEventListener('click', (e) => {
+                if (e.target.tagName === 'LI') {
+                    const selectedValue = e.target.dataset.value;
+                    dropdownToggle.textContent = e.target.textContent;
+                    dropdownToggle.dataset.value = selectedValue;
+                    dropdownMenu.classList.remove('open');
+                    dropdownToggle.classList.remove('open');
+                    dropdownOverlay.classList.remove('active');
+                    resetSliderForNewSource();
+                }
+            });
+            let scrollbarWidth = null;
 
             function getScrollbarWidth() {
                 if (scrollbarWidth !== null) return scrollbarWidth;
@@ -1765,12 +1780,13 @@ let scrollbarWidth = null;
                     totalImpact += getSourceImpact(key, percentage);
                 }
                 const displayImpact = Math.min(100, totalImpact);
-                combineImpactValue.textContent = displayImpact >= 99.99 ? '100%' :
-                    (displayImpact >= 10 ? displayImpact.toFixed(1) + '%' : displayImpact.toFixed(2) + '%');
+                combineImpactValue.textContent = formatPercentage(displayImpact, {
+                    checkMax: true
+                });
             }
 
             function resetCombine() {
-		const MAX_TIME = 0.8;  // ← ADICIONAR AQUI
+                const MAX_TIME = 0.8; // ← ADICIONAR AQUI
                 let needsAnimation = false;
                 for (const key in combineSources) {
                     if (combineSources[key] > 0) {
@@ -1786,11 +1802,9 @@ let scrollbarWidth = null;
                         startImpact,
                         0,
                         MAX_TIME * 1000,
-                        (val) => {
-                            const displayImpact = Math.min(100, val);
-                            if (displayImpact >= 99.99) return '100%';
-                            return displayImpact >= 10 ? displayImpact.toFixed(1) + '%' : displayImpact.toFixed(2) + '%';
-                        }
+                        (val) => formatPercentage(Math.min(100, val), {
+                            checkMax: true
+                        })
                     );
                 } else {
                     combineImpactValue.textContent = '0.00%';
@@ -1810,7 +1824,7 @@ let scrollbarWidth = null;
                             startValue,
                             0,
                             MAX_TIME * 1000,
-                            (val) => val >= 10 ? val.toFixed(1) + '%' : val.toFixed(2) + '%'
+                            (val) => formatPercentage(val)
                         );
                     } else {
                         valueDisplay.textContent = '0.00%';
@@ -1866,8 +1880,7 @@ let scrollbarWidth = null;
                     const sliderPosition = (adjustedPercentage / maxPercentage) * 100;
                     thumb.style.left = `${sliderPosition}%`;
                     fill.style.width = `${sliderPosition}%`;
-                    valueDisplay.textContent = adjustedPercentage >= 10 ?
-                        adjustedPercentage.toFixed(1) + '%' : adjustedPercentage.toFixed(2) + '%';
+                    valueDisplay.textContent = formatPercentage(adjustedPercentage);
                     updateCombineDisplay();
                     if (adjustedPercentage > 0 && resetPickSourceFunc) {
                         resetPickSourceFunc();
