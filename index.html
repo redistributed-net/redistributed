@@ -1068,7 +1068,7 @@
                         "priceCurrency": "USD"
                     },
                     "featureList": [
-                        "Six global resource sources to redistribute",
+                        "Five global resources to redistribute",
                         "Single or combined source scenarios",
                         "Real-time starvation reduction calculations",
                         "Social media sharing"
@@ -1084,7 +1084,7 @@
                             "@type": "HowToStep",
                             "position": 1,
                             "name": "Pick a source",
-                            "text": "Choose from six global sources: military expenditure, food loss and waste, tax abuse, fossil fuel support, overall luxury spending, personal luxury spending.",
+                            "text": "Choose from five global sources: military expenditure, food loss and waste, tax abuse, fossil fuel support, luxury spending.",
                             "url": "https://redistributed.net/#source-selection"
                         },
                         {
@@ -1178,8 +1178,7 @@
                                 <li data-value="foodwaste">Food loss and waste</li>
                                 <li data-value="taxabuse">Tax abuse</li>
                                 <li data-value="fossilfuel">Fossil fuel support</li>
-                                <li data-value="overallluxury">Overall luxury spending</li>
-                                <li data-value="personalluxury">Personal luxury spending</li>
+                                <li data-value="luxury">Luxury spending</li>
                             </ul>
                         </div>
                     </div>
@@ -1260,10 +1259,10 @@
                     </div>
                     <div class="combine-slider-item">
                         <div class="combine-slider-header">
-                            <span class="combine-slider-label">Overall luxury spending</span>
-                            <span class="combine-slider-value" id="combine-overallluxury-value">0.00%</span>
+                            <span class="combine-slider-label">Luxury spending</span>
+                            <span class="combine-slider-value" id="combine-luxury-value">0.00%</span>
                         </div>
-                        <div class="combine-slider" data-source="overallluxury">
+                        <div class="combine-slider" data-source="luxury">
                             <div class="combine-track">
                                 <div class="combine-fill"></div>
                             </div>
@@ -1395,8 +1394,7 @@
                 <button class="modal-close icon-button">&times;</button>
             </div>
             <div class="modal-text">
-                <p>This is an advocacy project. Your <a href="https://buy.stripe.com/3cI5kF2SA2Rw03wcYf87K00" target="_blank" rel="noopener" style="color: var(--text-primary); text-decoration: none;">support</a> helps keep the tool running, update data,
-                    and expand its reach.</p>
+                <p>Your <a href="https://buy.stripe.com/3cI5kF2SA2Rw03wcYf87K00" target="_blank" rel="noopener" style="color: var(--text-primary); text-decoration: none;">support</a> helps keep the tool running, update data, and expand its reach.</p>
             </div>
         </div>
     </div>
@@ -1409,7 +1407,7 @@
                     total: 2718000000000,
                     includes: "Personnel, operations and maintenance, procurement, military research and development, military construction, military aid",
                     value: "US$2.718 trillion",
-                    source: "Stockholm International Peace Research Institute (2025), SIPRI Yearbook 2025"
+                    source: "Stockholm International Peace Research Institute (2025), <em>SIPRI Yearbook 2025</em>"
                 },
                 foodwaste: {
                     name: "Food loss and waste",
@@ -1417,7 +1415,7 @@
                     total: 1000000000000,
                     includes: "Food loss along the food supply chain from harvest up to, but not including, the retail level<br>Food waste at the retail and consumption levels",
                     value: "US$1.0 trillion",
-                    source: "United Nations Environment Programme (2024), Food Waste Index Report 2024"
+                    source: "United Nations Environment Programme (2024), <em>Food Waste Index Report 2024</em>"
                 },
                 taxabuse: {
                     name: "Tax abuse",
@@ -1425,7 +1423,7 @@
                     total: 492000000000,
                     includes: "Multinational corporations and wealthy individuals using tax havens to underpay tax",
                     value: "US$492 billion",
-                    source: "Tax Justice Network (2024), State of Tax Justice 2024"
+                    source: "Tax Justice Network (2024), <em>State of Tax Justice 2024</em>"
                 },
                 fossilfuel: {
                     name: "Fossil fuel support",
@@ -1433,24 +1431,15 @@
                     total: 514100000000,
                     includes: "Budgetary transfers and tax expenditures that provide a benefit or preference for fossil-fuel production or consumption",
                     value: "US$514.1 billion",
-                    source: "The Organisation for Economic Co-operation and Development (2024), OECD Inventory of Support Measures for Fossil Fuels 2024"
+                    source: "The Organisation for Economic Co-operation and Development (2024), <em>OECD Inventory of Support Measures for Fossil Fuels 2024</em>"
                 },
-                overallluxury: {
-                    name: "Overall luxury spending",
-                    shareableName: "luxury spending",
+                luxury: {
+                    name: "Luxury spending",
+    		    shareableName: "luxury spending",
                     total: 1602000000000,
                     includes: "Luxury cars, personal luxury goods, luxury hospitality, fine wines and spirits, gourmet food and fine dining, high-end furniture and housewares, fine art, private jets and yachts, luxury cruises",
                     value: "€1.48 trillion (US$1.602 trillion)",
-                    source: "Bain & Company (2025), Luxury in Transition",
-                    conversionNote: "EUR values converted to USD using 2024 average exchange rate (1.0822)"
-                },
-                personalluxury: {
-                    name: "Personal luxury spending",
-                    shareableName: "personal luxury spending",
-                    total: 393000000000,
-                    includes: "Subset of overall luxury spending: beauty, leather, apparel, watches, jewelry, shoes, other accessories (including eyewear)",
-                    value: "€363 billion (US$393 billion)",
-                    source: "Bain & Company (2025), Luxury in Transition",
+                    source: "Bain & Company (2025), <em>Luxury in Transition</em>",
                     conversionNote: "EUR values converted to USD using 2024 average exchange rate (1.0822)"
                 }
             },
@@ -1510,7 +1499,7 @@
             foodwaste: 0,
             taxabuse: 0,
             fossilfuel: 0,
-            overallluxury: 0,
+            luxury: 0,
         };
         let resetCombineSourcesFunc, resetPickSourceFunc;
         document.addEventListener('DOMContentLoaded', () => {
@@ -1600,7 +1589,7 @@
                 if (selectedSource.conversionNote) {
                     transferValue.innerHTML += '<br><span class="conversion-note">' + selectedSource.conversionNote + '</span>';
                 }
-                transferSource.textContent = selectedSource.source;
+                transferSource.innerHTML = selectedSource.source;
             }
 
             function calculateImpact() {
