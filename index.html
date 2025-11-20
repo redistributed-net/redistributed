@@ -501,19 +501,6 @@
             color: var(--text-primary);
         }
 
-        .footer-line-1 .support-link {
-            color: var(--text-primary);
-            font-weight: 500;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: color 0.2s ease;
-            cursor: pointer;
-        }
-
-        .footer-line-1 .support-link:hover {
-            color: var(--text-secondary);
-        }
-
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1302,9 +1289,9 @@
         <footer class="footer">
             <div class="footer-links">
                 <div class="footer-line-1">
-                    <a href="#" id="about-link">The math</a>
+                    <a href="#" id="math-link">The math</a>
                     <span>•</span>
-                    <a href="#" id="support-link">Support this project</a>
+                    <a href="#" id="about-link">About</a>
                     <span>•</span>
                     <a href="mailto:redistributed.net@gmail.com">Contact</a>
                 </div>
@@ -1312,7 +1299,7 @@
             </div>
         </footer>
     </div>
-    <div id="about-modal" class="modal-overlay">
+    <div id="math-modal" class="modal-overlay">
         <div class="modal-content modal-content-small">
             <div class="modal-header">
                 <h3 class="modal-title">The math</h3>
@@ -1335,13 +1322,8 @@
                     <div class="modal-detail-label">Total annual cost</div>
                     <div class="modal-detail-value">US$6.75 billion (37M × 0.50 × 365)</div>
                 </div>
-                <div class="modal-detail-section">
-                    <div class="modal-detail-label">Scope</div>
-                    <div class="modal-detail-value no-margin">Direct food provision. To reach those 37 million starving people, the WFP will use existing systems already working around the world, and scale them up where needed</div>
-                </div>
             </div>
         </div>
-    </div>
     </div>
     <div id="transfer-modal" class="modal-overlay">
         <div class="modal-content">
@@ -1387,14 +1369,37 @@
             </div>
         </div>
     </div>
-    <div id="support-modal" class="modal-overlay">
+    <div id="about-modal" class="modal-overlay">
         <div class="modal-content modal-content-small">
             <div class="modal-header">
-                <h3 class="modal-title">Support this project</h3>
+                <h3 class="modal-title">About</h3>
                 <button class="modal-close icon-button">&times;</button>
             </div>
             <div class="modal-text">
-                <p>Your <a href="https://buy.stripe.com/3cI5kF2SA2Rw03wcYf87K00" target="_blank" rel="noopener" style="color: var(--text-primary); text-decoration: none;">support</a> helps keep the tool running, update data, and expand its reach.</p>
+                <div class="modal-detail-section">
+                    <div class="modal-detail-label">redistributed</div>
+                    <div class="modal-detail-value">The data exists, scattered across reports. We connected the dots. Move the slider. If the slider moves you, take a stand</div>
+                </div>
+                <div class="modal-detail-section">
+                    <div class="modal-detail-label">"We can't afford it"</div>
+                    <div class="modal-detail-value">Yes, we can. 0.25%. Next excuse</div>
+                </div>
+                <div class="modal-detail-section">
+                    <div class="modal-detail-label">"What about logistics?"</div>
+                    <div class="modal-detail-value">The UN World Food Programme has the people, tools and partners to get the job done</div>
+                </div>
+                <div class="modal-detail-section">
+                    <div class="modal-detail-label">"We need to address root causes"</div>
+                    <div class="modal-detail-value">Ask someone starving what the root cause is. The answer is lack of food. You don't debate complex theories on an empty stomach</div>
+                </div>
+                <div class="modal-detail-section">
+                    <div class="modal-detail-label">The tool doesn't argue. It calculates</div>
+                    <div class="modal-detail-value">This isn't a problem without a solution. It's a solution without political will. Every day we delay, we choose the outcome</div>
+                </div>
+                <div class="modal-detail-section">
+                    <div class="modal-detail-label">Support this project</div>
+                    <div class="modal-detail-value no-margin">Your <a href="https://buy.stripe.com/3cI5kF2SA2Rw03wcYf87K00" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">support</a> helps keep the tool running, update data, and expand its reach</div>
+                </div>
             </div>
         </div>
     </div>
@@ -1435,7 +1440,7 @@
                 },
                 luxury: {
                     name: "Luxury spending",
-    		    shareableName: "luxury spending",
+                    shareableName: "luxury spending",
                     total: 1602000000000,
                     includes: "Luxury cars, personal luxury goods, luxury hospitality, fine wines and spirits, gourmet food and fine dining, high-end furniture and housewares, fine art, private jets and yachts, luxury cruises",
                     value: "€1.48 trillion (US$1.602 trillion)",
@@ -1519,8 +1524,8 @@
             const modals = {
                 transfer: document.getElementById('transfer-modal'),
                 reduction: document.getElementById('reduction-modal'),
-                support: document.getElementById('support-modal'),
-                about: document.getElementById('about-modal')
+                about: document.getElementById('about-modal'),
+                math: document.getElementById('math-modal')
             };
             const transferName = document.getElementById('transfer-name');
             const transferIncludes = document.getElementById('transfer-includes');
@@ -1673,13 +1678,17 @@
             document.getElementById('transfer-info').addEventListener('click', () => openModal(modals.transfer));
             document.getElementById('reduction-info').addEventListener('click', () => openModal(modals.reduction));
             document.getElementById('combine-impact-info').addEventListener('click', () => openModal(modals.reduction));
+            document.getElementById('math-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(modals.math);
+            });
+            document.getElementById('math-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(modals.math);
+            });
             document.getElementById('about-link').addEventListener('click', (e) => {
                 e.preventDefault();
                 openModal(modals.about);
-            });
-            document.getElementById('support-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                openModal(modals.support);
             });
             dropdownToggle.addEventListener('click', () => {
                 dropdownMenu.classList.toggle('open');
